@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zentrok Box</title>
+  <style>
+    :root {
+      --roxo: #6a2cff;
+      --preto: #0e0e12;
+      --cinza: #1b1b22;
+      --texto: #f2f2f7;
+      --muted: #b9b9c6;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Arial, sans-serif;
+      background: linear-gradient(180deg, #0b0b10, #12121a);
+      color: var(--texto);
+    }
+    header {
+      padding: 28px 0;
+      border-bottom: 1px solid #ffffff14;
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+    h1 { font-size: 2.2rem; margin: 0 0 8px; }
+    p { color: var(--muted); line-height: 1.6; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 32px;
+    }
+    .card {
+      background: linear-gradient(180deg, #171722, #12121a);
+      border: 1px solid #ffffff14;
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 20px 40px #00000055;
+    }
+    .card h2 { margin-top: 0; }
+    .price {
+      font-size: 1.6rem;
+      color: var(--roxo);
+      font-weight: 700;
+      margin: 12px 0;
+    }
+    ul { padding-left: 18px; }
+    button {
+      background: linear-gradient(135deg, #6a2cff, #8b6bff);
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    button:hover { opacity: 0.9; }
+    section { padding: 56px 0; }
+    footer {
+      border-top: 1px solid #ffffff14;
+      padding: 28px 0;
+      text-align: center;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>Zentrok Box</h1>
+    <p>HDs prontos para jogos retrô e modernos — plug and play.</p>
+  </div>
+</header>
+
+<section class="container">
+  <h2>Escolha seu HD</h2>
+  <div class="grid">
+
+    <div class="card">
+      <h2>HD Retrô</h2>
+      <p>Perfeito pra nostalgia.</p>
+      <ul>
+        <li>Atari</li>
+        <li>MAME</li>
+        <li>AMIGA</li>
+        <li>PlayStation 1</li>
+      </ul>
+      <div class="price">R$ 250</div>
+      <button>Comprar</button>
+    </div>
+
+    <div class="card">
+      <h2>HD Premium</h2>
+      <p>O equilíbrio ideal.</p>
+      <ul>
+        <li>Atari até PSP</li>
+        <li>PlayStation 2</li>
+        <li>Xbox Clássico</li>
+      </ul>
+      <div class="price">R$ 300</div>
+      <button>Comprar</button>
+    </div>
+
+    <div class="card">
+      <h2>HD ULTRA</h2>
+      <p>Experiência completa.</p>
+      <ul>
+        <li>Atari até PS5</li>
+        <li>Catálogo máximo</li>
+        <li>Configuração premium</li>
+      </ul>
+      <div class="price">R$ 350</div>
+      <button>Comprar</button>
+    </div>
+
+  </div>
+</section>
+
+<section class="container">
+  <h2>Como instalar o HD</h2>
+  <ol>
+    <li>Conecte o HD no seu PC.</li>
+    <li>Entre na BIOS e selecione o HD como boot.</li>
+    <li>Salve e reinicie.</li>
+    <li>Pronto, é só jogar.</li>
+  </ol>
+</section>
+
+<footer>
+  <p>© 2026 Zentrok Box • Todos os direitos reservados</p>
+</footer>
+
+</body>
+</html>
