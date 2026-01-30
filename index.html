@@ -4,7 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zentrok Box</title>
+
+  <!-- FAVICONS -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --roxo1:#6a2cff;
@@ -14,35 +22,45 @@
       --texto:#f4f4ff;
       --muted:#b6b6d6;
     }
+
     *{box-sizing:border-box}
+
     body{
       margin:0;
       font-family:'Poppins',sans-serif;
       background:radial-gradient(circle at top, #1a1235, #07070c);
       color:var(--texto);
     }
+
     header{
       padding:40px 0;
       background:linear-gradient(135deg,var(--roxo1),var(--roxo2));
       box-shadow:0 20px 60px #00000088;
     }
+
     .container{max-width:1150px;margin:auto;padding:0 20px}
-    .top{display:flex;align-items:center;gap:16px}
+
+    .top{display:flex;align-items:center;gap:16px;justify-content:space-between}
+
     .logo{
       width:54px;height:54px;border-radius:14px;
       background:linear-gradient(135deg,#ffffff33,#ffffff11);
       display:flex;align-items:center;justify-content:center;
       font-weight:700;font-size:1.4rem
     }
+
     h1{margin:0;font-size:2.4rem}
     header p{margin:8px 0 0;opacity:.9}
+
     section{padding:70px 0}
     h2{font-size:2rem;margin-bottom:20px}
+
     .grid{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
       gap:24px
     }
+
     .card{
       background:linear-gradient(180deg,#1a1a2e,#12121d);
       border:1px solid #ffffff14;
@@ -52,6 +70,8 @@
       position:relative;
       overflow:hidden
     }
+
+    /* CORREÇÃO DO BUG DE CLIQUE */
     .card::after{
       content:'';
       position:absolute;
@@ -59,11 +79,14 @@
       width:120%;
       height:120%;
       background:radial-gradient(circle,var(--roxo1),transparent 70%);
-      opacity:.15
+      opacity:.15;
+      pointer-events:none;
     }
+
     .card h3{margin-top:0;font-size:1.5rem}
     .price{font-size:1.9rem;font-weight:700;color:var(--roxo2)}
     ul{padding-left:18px;color:var(--muted)}
+
     button{
       margin-top:16px;
       width:100%;
@@ -74,21 +97,27 @@
       border-radius:14px;
       font-weight:600;
       font-size:1rem;
-      cursor:pointer
+      cursor:pointer;
+      position:relative;
+      z-index:2;
     }
+
     button:hover{opacity:.9}
+
     .install{
       background:linear-gradient(180deg,#12121d,#0b0b14);
       border-radius:24px;
       padding:40px;
       box-shadow:0 30px 60px #00000088
     }
+
     footer{
       padding:30px 0;
       text-align:center;
       color:var(--muted);
       border-top:1px solid #ffffff14
     }
+
     #pagamentoModal{
       display:none;
       position:fixed;
@@ -98,6 +127,7 @@
       justify-content:center;
       z-index:10
     }
+
     .modal{
       background:#12121d;
       border:1px solid #ffffff22;
@@ -107,8 +137,11 @@
       width:90%;
       text-align:center
     }
+
     .payBtns button{width:auto;margin:8px}
+
     .tabs{display:flex;gap:10px}
+
     .tab{
       background:none;
       border:none;
@@ -120,22 +153,26 @@
       padding:10px 14px;
       border-radius:10px
     }
+
     .tab.active,.tab:hover{
       background:#ffffff22;
       opacity:1
     }
+
     .aba{animation:fade .4s ease}
+
     @keyframes fade{
       from{opacity:0;transform:translateY(10px)}
       to{opacity:1;transform:none}
     }
   </style>
 </head>
+
 <body>
 
 <header>
   <div class="container">
-    <div class="top" style="justify-content:space-between">
+    <div class="top">
       <div style="display:flex;align-items:center;gap:16px">
         <div class="logo">Z</div>
         <div>
@@ -218,10 +255,7 @@
 </div>
 
 <script>
-  let produtoAtual = '';
-
   function abrirPagamento(produto, valor){
-    produtoAtual = produto;
     document.getElementById('produtoTitulo').innerText = produto;
     document.getElementById('produtoPreco').innerText = 'Valor: R$ ' + valor;
     document.getElementById('pagamentoModal').style.display = 'flex';
@@ -245,7 +279,3 @@
 
 </body>
 </html>
-
-
-
-
