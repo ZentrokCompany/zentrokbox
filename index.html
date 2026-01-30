@@ -6,15 +6,14 @@
   <title>Zentrok Box</title>
 
   <!-- FAVICONS -->
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    :root {
+    :root{
       --roxo1:#6a2cff;
       --roxo2:#8b6bff;
       --bg:#0b0b14;
@@ -22,56 +21,34 @@
       --texto:#f4f4ff;
       --muted:#b6b6d6;
     }
-
     *{box-sizing:border-box}
-
     body{
       margin:0;
-      font-family:'Poppins',sans-serif;
-      background:radial-gradient(circle at top, #1a1235, #07070c);
-      color:var(--texto);
+      font-family:Poppins,sans-serif;
+      background:radial-gradient(circle at top,#1a1235,#07070c);
+      color:var(--texto)
     }
-
     header{
       padding:40px 0;
-      background:linear-gradient(135deg,var(--roxo1),var(--roxo2));
-      box-shadow:0 20px 60px #00000088;
+      background:linear-gradient(135deg,var(--roxo1),var(--roxo2))
     }
-
     .container{max-width:1150px;margin:auto;padding:0 20px}
-
-    .top{display:flex;align-items:center;gap:16px;justify-content:space-between}
-
+    .top{display:flex;justify-content:space-between;align-items:center}
     .logo{
       width:54px;height:54px;border-radius:14px;
-      background:linear-gradient(135deg,#ffffff33,#ffffff11);
+      background:#ffffff22;
       display:flex;align-items:center;justify-content:center;
       font-weight:700;font-size:1.4rem
     }
-
-    h1{margin:0;font-size:2.4rem}
-    header p{margin:8px 0 0;opacity:.9}
-
     section{padding:70px 0}
-    h2{font-size:2rem;margin-bottom:20px}
-
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-      gap:24px
-    }
-
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
     .card{
       background:linear-gradient(180deg,#1a1a2e,#12121d);
-      border:1px solid #ffffff14;
       border-radius:22px;
       padding:26px;
-      box-shadow:0 30px 70px #00000077;
       position:relative;
       overflow:hidden
     }
-
-    /* CORREÇÃO DO BUG DE CLIQUE */
     .card::after{
       content:'';
       position:absolute;
@@ -82,43 +59,26 @@
       opacity:.15;
       pointer-events:none;
     }
-
-    .card h3{margin-top:0;font-size:1.5rem}
-    .price{font-size:1.9rem;font-weight:700;color:var(--roxo2)}
-    ul{padding-left:18px;color:var(--muted)}
-
+    .price{font-size:1.8rem;font-weight:700;color:var(--roxo2)}
     button{
-      margin-top:16px;
       width:100%;
-      background:linear-gradient(135deg,var(--roxo1),var(--roxo2));
-      border:none;
-      color:white;
+      margin-top:16px;
       padding:14px;
+      border:none;
       border-radius:14px;
       font-weight:600;
-      font-size:1rem;
-      cursor:pointer;
-      position:relative;
-      z-index:2;
+      background:linear-gradient(135deg,var(--roxo1),var(--roxo2));
+      color:#fff;
+      cursor:pointer
     }
-
-    button:hover{opacity:.9}
-
-    .install{
-      background:linear-gradient(180deg,#12121d,#0b0b14);
-      border-radius:24px;
-      padding:40px;
-      box-shadow:0 30px 60px #00000088
-    }
-
     footer{
-      padding:30px 0;
       text-align:center;
-      color:var(--muted);
-      border-top:1px solid #ffffff14
+      padding:30px;
+      color:var(--muted)
     }
 
-    #pagamentoModal{
+    /* MODAL */
+    #pixModal{
       display:none;
       position:fixed;
       inset:0;
@@ -127,43 +87,26 @@
       justify-content:center;
       z-index:10
     }
-
     .modal{
       background:#12121d;
-      border:1px solid #ffffff22;
-      border-radius:22px;
       padding:30px;
+      border-radius:22px;
       max-width:420px;
       width:90%;
       text-align:center
     }
-
-    .payBtns button{width:auto;margin:8px}
-
-    .tabs{display:flex;gap:10px}
-
-    .tab{
-      background:none;
-      border:none;
-      color:#fff;
-      opacity:.7;
-      font-weight:600;
-      font-size:1rem;
-      cursor:pointer;
-      padding:10px 14px;
-      border-radius:10px
+    .qr{
+      margin:20px 0;
+      background:#fff;
+      padding:10px;
+      border-radius:12px
     }
-
-    .tab.active,.tab:hover{
-      background:#ffffff22;
-      opacity:1
-    }
-
-    .aba{animation:fade .4s ease}
-
-    @keyframes fade{
-      from{opacity:0;transform:translateY(10px)}
-      to{opacity:1;transform:none}
+    .pixKey{
+      background:#000;
+      padding:10px;
+      border-radius:10px;
+      font-size:.9rem;
+      word-break:break-all
     }
   </style>
 </head>
@@ -171,111 +114,83 @@
 <body>
 
 <header>
-  <div class="container">
-    <div class="top">
-      <div style="display:flex;align-items:center;gap:16px">
-        <div class="logo">Z</div>
-        <div>
-          <h1>Zentrok Box</h1>
-          <p>HDs gamers prontos • Plug and Play • Experiência premium</p>
-        </div>
+  <div class="container top">
+    <div style="display:flex;gap:16px;align-items:center">
+      <div class="logo">Z</div>
+      <div>
+        <h1>Zentrok Box</h1>
+        <p>HDs gamers prontos • Plug and Play</p>
       </div>
-      <nav class="tabs">
-        <button class="tab active" onclick="mostrarAba('comprar', this)">Compre seu HD</button>
-        <button class="tab" onclick="mostrarAba('instalar', this)">Como instalar</button>
-      </nav>
     </div>
   </div>
 </header>
 
-<section class="container aba" id="aba-comprar">
+<section class="container">
   <h2>Escolha seu HD</h2>
   <div class="grid">
 
     <div class="card">
       <h3>HD Retrô</h3>
-      <ul>
-        <li>Atari • MAME • AMIGA</li>
-        <li>PlayStation 1</li>
-      </ul>
-      <div class="price">R$ 250</div>
-      <button onclick="abrirPagamento('HD Retrô',250)">Comprar agora</button>
+      <p class="price">R$ 250</p>
+      <button onclick="abrirPix('HD Retrô',250)">Comprar</button>
     </div>
 
     <div class="card">
       <h3>HD Premium</h3>
-      <ul>
-        <li>Atari até PSP</li>
-        <li>PlayStation 2</li>
-        <li>Xbox Clássico</li>
-      </ul>
-      <div class="price">R$ 300</div>
-      <button onclick="abrirPagamento('HD Premium',300)">Comprar agora</button>
+      <p class="price">R$ 300</p>
+      <button onclick="abrirPix('HD Premium',300)">Comprar</button>
     </div>
 
     <div class="card">
       <h3>HD ULTRA</h3>
-      <ul>
-        <li>Atari até PS5</li>
-        <li>Catálogo máximo</li>
-        <li>Configuração premium</li>
-      </ul>
-      <div class="price">R$ 350</div>
-      <button onclick="abrirPagamento('HD ULTRA',350)">Comprar agora</button>
+      <p class="price">R$ 350</p>
+      <button onclick="abrirPix('HD ULTRA',350)">Comprar</button>
     </div>
 
-  </div>
-</section>
-
-<section class="container aba" id="aba-instalar" style="display:none">
-  <div class="install">
-    <h2>Como instalar o HD</h2>
-    <ol>
-      <li>Conecte o HD no computador</li>
-      <li>Entre na BIOS e selecione o HD</li>
-      <li>Salve e reinicie</li>
-      <li>Aproveite seus jogos 🎮</li>
-    </ol>
   </div>
 </section>
 
 <footer>
-  © 2026 Zentrok Box • Loja oficial
+  © 2026 Zentrok Box
 </footer>
 
-<div id="pagamentoModal">
+<!-- MODAL PIX -->
+<div id="pixModal">
   <div class="modal">
-    <h2 id="produtoTitulo"></h2>
-    <p id="produtoPreco"></p>
-    <div class="payBtns">
-      <button onclick="irStripe()">Pix / Cartão</button>
-      <button onclick="fecharPagamento()" style="background:#333">Cancelar</button>
+    <h2 id="pixProduto"></h2>
+    <p id="pixValor"></p>
+
+    <div class="qr">
+      <img id="pixQR" width="200">
     </div>
+
+    <div class="pixKey" id="pixKey"></div>
+
+    <button onclick="fecharPix()" style="background:#333">Fechar</button>
   </div>
 </div>
 
 <script>
-  function abrirPagamento(produto, valor){
-    document.getElementById('produtoTitulo').innerText = produto;
-    document.getElementById('produtoPreco').innerText = 'Valor: R$ ' + valor;
-    document.getElementById('pagamentoModal').style.display = 'flex';
+  const CHAVE_PIX = "SUA_CHAVE_PIX_AQUI";
+
+  function abrirPix(produto, valor){
+    document.getElementById('pixProduto').innerText = produto;
+    document.getElementById('pixValor').innerText = "Valor: R$ " + valor;
+    document.getElementById('pixKey').innerText = CHAVE_PIX;
+
+    const payload = `00020126360014BR.GOV.BCB.PIX0114${CHAVE_PIX}520400005303986540${valor.toFixed(2).replace('.','')}5802BR5913ZENTROK BOX6009SAO PAULO62070503***6304`;
+
+    document.getElementById('pixQR').src =
+      "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" + encodeURIComponent(payload);
+
+    document.getElementById('pixModal').style.display = 'flex';
   }
 
-  function fecharPagamento(){
-    document.getElementById('pagamentoModal').style.display = 'none';
-  }
-
-  function mostrarAba(aba, botao){
-    document.getElementById('aba-comprar').style.display = aba === 'comprar' ? 'block' : 'none';
-    document.getElementById('aba-instalar').style.display = aba === 'instalar' ? 'block' : 'none';
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    botao.classList.add('active');
-  }
-
-  function irStripe(){
-    window.location.href = 'https://buy.stripe.com/SEU_LINK_AQUI';
+  function fecharPix(){
+    document.getElementById('pixModal').style.display = 'none';
   }
 </script>
 
 </body>
 </html>
+
