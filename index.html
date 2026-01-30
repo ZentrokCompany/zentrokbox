@@ -27,9 +27,7 @@
       box-shadow:0 20px 60px #00000088;
     }
     .container{max-width:1150px;margin:auto;padding:0 20px}
-    .top{
-      display:flex;align-items:center;gap:16px
-    }
+    .top{display:flex;align-items:center;gap:16px}
     .logo{
       width:54px;height:54px;border-radius:14px;
       background:linear-gradient(135deg,#ffffff33,#ffffff11);
@@ -41,7 +39,9 @@
     section{padding:70px 0}
     h2{font-size:2rem;margin-bottom:20px}
     .grid{
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:24px
     }
     .card{
       background:linear-gradient(180deg,#1a1a2e,#12121d);
@@ -53,8 +53,11 @@
       overflow:hidden
     }
     .card::after{
-      content:'';position:absolute;inset:auto -40% -40% auto;
-      width:120%;height:120%;
+      content:'';
+      position:absolute;
+      inset:auto -40% -40% auto;
+      width:120%;
+      height:120%;
       background:radial-gradient(circle,var(--roxo1),transparent 70%);
       opacity:.15
     }
@@ -62,38 +65,70 @@
     .price{font-size:1.9rem;font-weight:700;color:var(--roxo2)}
     ul{padding-left:18px;color:var(--muted)}
     button{
-      margin-top:16px;width:100%;
+      margin-top:16px;
+      width:100%;
       background:linear-gradient(135deg,var(--roxo1),var(--roxo2));
-      border:none;color:white;
-      padding:14px;border-radius:14px;
-      font-weight:600;font-size:1rem;cursor:pointer
+      border:none;
+      color:white;
+      padding:14px;
+      border-radius:14px;
+      font-weight:600;
+      font-size:1rem;
+      cursor:pointer
     }
     button:hover{opacity:.9}
     .install{
       background:linear-gradient(180deg,#12121d,#0b0b14);
-      border-radius:24px;padding:40px;
+      border-radius:24px;
+      padding:40px;
       box-shadow:0 30px 60px #00000088
     }
     footer{
-      padding:30px 0;text-align:center;
-      color:var(--muted);border-top:1px solid #ffffff14
+      padding:30px 0;
+      text-align:center;
+      color:var(--muted);
+      border-top:1px solid #ffffff14
     }
-    /* Modal */
     #pagamentoModal{
-      display:none;position:fixed;inset:0;
-      background:#000000cc;align-items:center;justify-content:center;z-index:10
+      display:none;
+      position:fixed;
+      inset:0;
+      background:#000000cc;
+      align-items:center;
+      justify-content:center;
+      z-index:10
     }
     .modal{
-      background:#12121d;border:1px solid #ffffff22;
-      border-radius:22px;padding:30px;
-      max-width:420px;width:90%;text-align:center
+      background:#12121d;
+      border:1px solid #ffffff22;
+      border-radius:22px;
+      padding:30px;
+      max-width:420px;
+      width:90%;
+      text-align:center
     }
     .payBtns button{width:auto;margin:8px}
-  .tabs{display:flex;gap:10px}
-    .tab{background:none;border:none;color:#fff;opacity:.7;font-weight:600;font-size:1rem;cursor:pointer;padding:10px 14px;border-radius:10px}
-    .tab.active,.tab:hover{background:#ffffff22;opacity:1}
+    .tabs{display:flex;gap:10px}
+    .tab{
+      background:none;
+      border:none;
+      color:#fff;
+      opacity:.7;
+      font-weight:600;
+      font-size:1rem;
+      cursor:pointer;
+      padding:10px 14px;
+      border-radius:10px
+    }
+    .tab.active,.tab:hover{
+      background:#ffffff22;
+      opacity:1
+    }
     .aba{animation:fade .4s ease}
-    @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+    @keyframes fade{
+      from{opacity:0;transform:translateY(10px)}
+      to{opacity:1;transform:none}
+    }
   </style>
 </head>
 <body>
@@ -102,32 +137,21 @@
   <div class="container">
     <div class="top" style="justify-content:space-between">
       <div style="display:flex;align-items:center;gap:16px">
-        <div class="logo" aria-label="Zentrok Box logo">
-          <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img">
-            <defs>
-              <linearGradient id="zg" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
-                <stop offset="100%" stop-color="#e6dcff" stop-opacity="0.95"/>
-              </linearGradient>
-            </defs>
-            <rect x="5" y="5" rx="22" ry="22" width="90" height="90" fill="none" stroke="url(#zg)" stroke-width="6"/>
-            <path d="M28 30h44L32 70h44" fill="none" stroke="url(#zg)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
+        <div class="logo">Z</div>
         <div>
           <h1>Zentrok Box</h1>
           <p>HDs gamers prontos • Plug and Play • Experiência premium</p>
         </div>
       </div>
       <nav class="tabs">
-        <button class="tab active" onclick="mostrarAba('comprar')">Compre seu HD</button>
-        <button class="tab" onclick="mostrarAba('instalar')">Como instalar</button>
+        <button class="tab active" onclick="mostrarAba('comprar', this)">Compre seu HD</button>
+        <button class="tab" onclick="mostrarAba('instalar', this)">Como instalar</button>
       </nav>
     </div>
   </div>
 </header>
 
-<<section class="container aba" id="aba-comprar">
+<section class="container aba" id="aba-comprar">
   <h2>Escolha seu HD</h2>
   <div class="grid">
 
@@ -194,28 +218,34 @@
 </div>
 
 <script>
-  function abrirPagamento(p, v){
-    produtoAtual=p;
-    document.getElementById('produtoTitulo').innerText=p;
-    document.getElementById('produtoPreco').innerText='Valor: R$ '+v;
-    document.getElementById('pagamentoModal').style.display='flex';
+  let produtoAtual = '';
+
+  function abrirPagamento(produto, valor){
+    produtoAtual = produto;
+    document.getElementById('produtoTitulo').innerText = produto;
+    document.getElementById('produtoPreco').innerText = 'Valor: R$ ' + valor;
+    document.getElementById('pagamentoModal').style.display = 'flex';
   }
+
   function fecharPagamento(){
-    document.getElementById('pagamentoModal').style.display='none';
+    document.getElementById('pagamentoModal').style.display = 'none';
   }
-  function mostrarAba(aba){
-    document.getElementById('aba-comprar').style.display = aba==='comprar'?'block':'none';
-    document.getElementById('aba-instalar').style.display = aba==='instalar'?'block':'none';
-    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-    event.target.classList.add('active');
+
+  function mostrarAba(aba, botao){
+    document.getElementById('aba-comprar').style.display = aba === 'comprar' ? 'block' : 'none';
+    document.getElementById('aba-instalar').style.display = aba === 'instalar' ? 'block' : 'none';
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    botao.classList.add('active');
   }
+
   function irStripe(){
-    window.location.href='https://buy.stripe.com/SEU_LINK_AQUI';
+    window.location.href = 'https://buy.stripe.com/SEU_LINK_AQUI';
   }
 </script>
 
 </body>
 </html>
+
 
 
 
