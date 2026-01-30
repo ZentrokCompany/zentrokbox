@@ -4,201 +4,218 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zentrok Box</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --roxo: #6a2cff;
-      --preto: #0e0e12;
-      --cinza: #1b1b22;
-      --texto: #f2f2f7;
-      --muted: #b9b9c6;
+      --roxo1:#6a2cff;
+      --roxo2:#8b6bff;
+      --bg:#0b0b14;
+      --card:#151522;
+      --texto:#f4f4ff;
+      --muted:#b6b6d6;
     }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Arial, sans-serif;
-      background: linear-gradient(180deg, #0b0b10, #12121a);
-      color: var(--texto);
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:'Poppins',sans-serif;
+      background:radial-gradient(circle at top, #1a1235, #07070c);
+      color:var(--texto);
     }
-    header {
-      padding: 28px 0;
-      border-bottom: 1px solid #ffffff14;
+    header{
+      padding:40px 0;
+      background:linear-gradient(135deg,var(--roxo1),var(--roxo2));
+      box-shadow:0 20px 60px #00000088;
     }
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-    h1 { font-size: 2.2rem; margin: 0 0 8px; }
-    p { color: var(--muted); line-height: 1.6; }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-      margin-top: 32px;
+    .container{max-width:1150px;margin:auto;padding:0 20px}
+    .top{
+      display:flex;align-items:center;gap:16px
     }
-    .card {
-      background: linear-gradient(180deg, #171722, #12121a);
-      border: 1px solid #ffffff14;
-      border-radius: 18px;
-      padding: 20px;
-      box-shadow: 0 20px 40px #00000055;
+    .logo{
+      width:54px;height:54px;border-radius:14px;
+      background:linear-gradient(135deg,#ffffff33,#ffffff11);
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;font-size:1.4rem
     }
-    .card h2 { margin-top: 0; }
-    .price {
-      font-size: 1.6rem;
-      color: var(--roxo);
-      font-weight: 700;
-      margin: 12px 0;
+    h1{margin:0;font-size:2.4rem}
+    header p{margin:8px 0 0;opacity:.9}
+    section{padding:70px 0}
+    h2{font-size:2rem;margin-bottom:20px}
+    .grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px
     }
-    ul { padding-left: 18px; }
-    button {
-      background: linear-gradient(135deg, #6a2cff, #8b6bff);
-      color: white;
-      border: none;
-      padding: 12px 18px;
-      border-radius: 12px;
-      cursor: pointer;
-      font-weight: 600;
+    .card{
+      background:linear-gradient(180deg,#1a1a2e,#12121d);
+      border:1px solid #ffffff14;
+      border-radius:22px;
+      padding:26px;
+      box-shadow:0 30px 70px #00000077;
+      position:relative;
+      overflow:hidden
     }
-    button:hover { opacity: 0.9; }
-    section { padding: 56px 0; }
-    footer {
-      border-top: 1px solid #ffffff14;
-      padding: 28px 0;
-      text-align: center;
-      color: var(--muted);
+    .card::after{
+      content:'';position:absolute;inset:auto -40% -40% auto;
+      width:120%;height:120%;
+      background:radial-gradient(circle,var(--roxo1),transparent 70%);
+      opacity:.15
     }
+    .card h3{margin-top:0;font-size:1.5rem}
+    .price{font-size:1.9rem;font-weight:700;color:var(--roxo2)}
+    ul{padding-left:18px;color:var(--muted)}
+    button{
+      margin-top:16px;width:100%;
+      background:linear-gradient(135deg,var(--roxo1),var(--roxo2));
+      border:none;color:white;
+      padding:14px;border-radius:14px;
+      font-weight:600;font-size:1rem;cursor:pointer
+    }
+    button:hover{opacity:.9}
+    .install{
+      background:linear-gradient(180deg,#12121d,#0b0b14);
+      border-radius:24px;padding:40px;
+      box-shadow:0 30px 60px #00000088
+    }
+    footer{
+      padding:30px 0;text-align:center;
+      color:var(--muted);border-top:1px solid #ffffff14
+    }
+    /* Modal */
+    #pagamentoModal{
+      display:none;position:fixed;inset:0;
+      background:#000000cc;align-items:center;justify-content:center;z-index:10
+    }
+    .modal{
+      background:#12121d;border:1px solid #ffffff22;
+      border-radius:22px;padding:30px;
+      max-width:420px;width:90%;text-align:center
+    }
+    .payBtns button{width:auto;margin:8px}
+  .tabs{display:flex;gap:10px}
+    .tab{background:none;border:none;color:#fff;opacity:.7;font-weight:600;font-size:1rem;cursor:pointer;padding:10px 14px;border-radius:10px}
+    .tab.active,.tab:hover{background:#ffffff22;opacity:1}
+    .aba{animation:fade .4s ease}
+    @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
   </style>
 </head>
 <body>
 
 <header>
   <div class="container">
-    <h1>Zentrok Box</h1>
-    <p>HDs prontos para jogos retrô e modernos — plug and play.</p>
+    <div class="top" style="justify-content:space-between">
+      <div style="display:flex;align-items:center;gap:16px">
+        <div class="logo" aria-label="Zentrok Box logo">
+          <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img">
+            <defs>
+              <linearGradient id="zg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+                <stop offset="100%" stop-color="#e6dcff" stop-opacity="0.95"/>
+              </linearGradient>
+            </defs>
+            <rect x="5" y="5" rx="22" ry="22" width="90" height="90" fill="none" stroke="url(#zg)" stroke-width="6"/>
+            <path d="M28 30h44L32 70h44" fill="none" stroke="url(#zg)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <h1>Zentrok Box</h1>
+          <p>HDs gamers prontos • Plug and Play • Experiência premium</p>
+        </div>
+      </div>
+      <nav class="tabs">
+        <button class="tab active" onclick="mostrarAba('comprar')">Compre seu HD</button>
+        <button class="tab" onclick="mostrarAba('instalar')">Como instalar</button>
+      </nav>
+    </div>
   </div>
 </header>
 
-<section class="container">
+<<section class="container aba" id="aba-comprar">
   <h2>Escolha seu HD</h2>
   <div class="grid">
 
     <div class="card">
-      <h2>HD Retrô</h2>
-      <p>Perfeito pra nostalgia.</p>
+      <h3>HD Retrô</h3>
       <ul>
-        <li>Atari</li>
-        <li>MAME</li>
-        <li>AMIGA</li>
+        <li>Atari • MAME • AMIGA</li>
         <li>PlayStation 1</li>
       </ul>
       <div class="price">R$ 250</div>
-      <button onclick="abrirPagamento('HD Retrô',250)">Comprar</button>
+      <button onclick="abrirPagamento('HD Retrô',250)">Comprar agora</button>
     </div>
 
     <div class="card">
-      <h2>HD Premium</h2>
-      <p>O equilíbrio ideal.</p>
+      <h3>HD Premium</h3>
       <ul>
         <li>Atari até PSP</li>
         <li>PlayStation 2</li>
         <li>Xbox Clássico</li>
       </ul>
       <div class="price">R$ 300</div>
-      <button onclick="abrirPagamento('HD Premium',300)">Comprar</button>
+      <button onclick="abrirPagamento('HD Premium',300)">Comprar agora</button>
     </div>
 
     <div class="card">
-      <h2>HD ULTRA</h2>
-      <p>Experiência completa.</p>
+      <h3>HD ULTRA</h3>
       <ul>
         <li>Atari até PS5</li>
         <li>Catálogo máximo</li>
         <li>Configuração premium</li>
       </ul>
       <div class="price">R$ 350</div>
-      <button onclick="abrirPagamento('HD ULTRA',350)">Comprar</button>
+      <button onclick="abrirPagamento('HD ULTRA',350)">Comprar agora</button>
     </div>
 
   </div>
 </section>
 
-<section class="container">
-  <h2>Como instalar o HD</h2>
-  <ol>
-    <li>Conecte o HD no seu PC.</li>
-    <li>Entre na BIOS e selecione o HD como boot.</li>
-    <li>Salve e reinicie.</li>
-    <li>Pronto, é só jogar.</li>
-  </ol>
-  
+<section class="container aba" id="aba-instalar" style="display:none">
+  <div class="install">
+    <h2>Como instalar o HD</h2>
+    <ol>
+      <li>Conecte o HD no computador</li>
+      <li>Entre na BIOS e selecione o HD</li>
+      <li>Salve e reinicie</li>
+      <li>Aproveite seus jogos 🎮</li>
+    </ol>
+  </div>
 </section>
 
 <footer>
-  <p>© 2026 Zentrok Box • Todos os direitos reservados</p>
+  © 2026 Zentrok Box • Loja oficial
 </footer>
 
-<!-- Modal Pagamento -->
-<div id="pagamentoModal" style="display:none; position:fixed; inset:0; background:#000000aa; align-items:center; justify-content:center;">
-  <div style="background:#12121a; border:1px solid #ffffff22; border-radius:16px; padding:24px; max-width:420px; width:90%; text-align:center;">
+<div id="pagamentoModal">
+  <div class="modal">
     <h2 id="produtoTitulo"></h2>
     <p id="produtoPreco"></p>
-
-    <h3>Escolha a forma de pagamento</h3>
-
-    <button onclick="mostrarPix()">📲 Pix</button>
-    <button onclick="mostrarCartao()" style="margin-left:8px">💳 Cartão</button>
-
-    <div id="pixArea" style="display:none; margin-top:16px">
-      <p><strong>Chave Pix:</strong></p>
-      <code>SEU_PIX_AQUI</code>
-      <p style="font-size:0.9rem; margin-top:8px">Após pagar, envie o comprovante abaixo.</p>
-
-      <form name="comprovante-pix" method="POST" data-netlify="true" enctype="multipart/form-data">
-        <input type="hidden" name="form-name" value="comprovante-pix">
-        <input type="hidden" name="produto" id="produtoInput">
-        <input type="text" name="nome" placeholder="Seu nome" required style="width:100%;padding:10px;border-radius:8px;margin-bottom:8px;">
-        <input type="email" name="email" placeholder="Seu e-mail" required style="width:100%;padding:10px;border-radius:8px;margin-bottom:8px;">
-        <input type="file" name="comprovante" required style="margin-bottom:12px;">
-        <button type="submit">Enviar comprovante</button>
-      </form>
+    <div class="payBtns">
+      <button onclick="irStripe()">Pix / Cartão</button>
+      <button onclick="fecharPagamento()" style="background:#333">Cancelar</button>
     </div>
-
-    <div id="cartaoArea" style="display:none; margin-top:16px">
-      <p>Pagamento via Stripe (Cartão ou Pix).</p>
-      <button onclick="irStripe()">Ir para pagamento</button>
-    </div>
-
-    <br>
-    <button onclick="fecharPagamento()" style="background:#333">Fechar</button>
   </div>
 </div>
 
 <script>
-  function abrirPagamento(produto, preco) {
-    document.getElementById('produtoTitulo').innerText = produto;
-    document.getElementById('produtoPreco').innerText = 'Valor: R$ ' + preco;
-    document.getElementById('produtoInput').value = produto;
-    document.getElementById('pagamentoModal').style.display = 'flex';
+  function abrirPagamento(p, v){
+    produtoAtual=p;
+    document.getElementById('produtoTitulo').innerText=p;
+    document.getElementById('produtoPreco').innerText='Valor: R$ '+v;
+    document.getElementById('pagamentoModal').style.display='flex';
   }
-  function fecharPagamento() {
-    document.getElementById('pagamentoModal').style.display = 'none';
-    document.getElementById('pixArea').style.display = 'none';
-    document.getElementById('cartaoArea').style.display = 'none';
+  function fecharPagamento(){
+    document.getElementById('pagamentoModal').style.display='none';
   }
-  function mostrarPix() {
-    document.getElementById('pixArea').style.display = 'block';
-    document.getElementById('cartaoArea').style.display = 'none';
+  function mostrarAba(aba){
+    document.getElementById('aba-comprar').style.display = aba==='comprar'?'block':'none';
+    document.getElementById('aba-instalar').style.display = aba==='instalar'?'block':'none';
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    event.target.classList.add('active');
   }
-  function mostrarCartao() {
-    document.getElementById('cartaoArea').style.display = 'block';
-    document.getElementById('pixArea').style.display = 'none';
-  }
-  function irStripe() {
-    // link de pagamento real da Stripe (Pix + Cartão)
-    window.location.href = 'https://buy.stripe.com/SEU_LINK_AQUI';
+  function irStripe(){
+    window.location.href='https://buy.stripe.com/SEU_LINK_AQUI';
   }
 </script>
 
-
-
 </body>
 </html>
+
 
 
