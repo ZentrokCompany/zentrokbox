@@ -89,7 +89,7 @@
         <li>PlayStation 1</li>
       </ul>
       <div class="price">R$ 250</div>
-      <button>Comprar</button>
+      <button onclick="abrirPix()">Comprar via Pix</button>
     </div>
 
     <div class="card">
@@ -101,7 +101,7 @@
         <li>Xbox Clássico</li>
       </ul>
       <div class="price">R$ 300</div>
-      <button>Comprar</button>
+      <button onclick="abrirPix()">Comprar via Pix</button>
     </div>
 
     <div class="card">
@@ -113,7 +113,7 @@
         <li>Configuração premium</li>
       </ul>
       <div class="price">R$ 350</div>
-      <button>Comprar</button>
+      <button onclick="abrirPix()">Comprar via Pix</button>
     </div>
 
   </div>
@@ -127,11 +127,58 @@
     <li>Salve e reinicie.</li>
     <li>Pronto, é só jogar.</li>
   </ol>
+  <div style="margin-top:40px">
+    <h2>Pagamento</h2>
+    <p><strong>PIX:</strong> Chave exibida após clicar em comprar.</p>
+    <button onclick="alert('PIX: 00020126360014BR.GOV.BCB.PIX...')">📲 Pagar com PIX</button>
+
+    <p style="margin-top:20px"><strong>Cartão:</strong></p>
+    <button onclick="alert('Pagamento por cartão via Stripe Checkout (modo real).\nConfigure sua chave pública da Stripe no código.')">💳 Pagar com Cartão</button>
+  </div>
 </section>
 
 <footer>
   <p>© 2026 Zentrok Box • Todos os direitos reservados</p>
 </footer>
 
+<!-- Modal Pix -->
+<div id="pixModal" style="display:none; position:fixed; inset:0; background:#000000aa; align-items:center; justify-content:center;">
+  <div style="background:#12121a; border:1px solid #ffffff22; border-radius:16px; padding:24px; max-width:420px; width:90%; text-align:center;">
+    <h2>Pagamento via Pix</h2>
+    <p>Escaneie o QR Code ou copie a chave Pix abaixo.</p>
+    <div style="background:#0e0e12; padding:12px; border-radius:12px; margin:12px 0;">
+      <strong>Chave Pix:</strong><br>
+      <code>SEU_PIX_AQUI</code>
+    </div>
+    <p style="font-size:0.9rem;">Após o pagamento, envie o comprovante pelo formulário abaixo.</p>
+
+<form name="comprovante-pix" method="POST" data-netlify="true" enctype="multipart/form-data">
+  <input type="hidden" name="form-name" value="comprovante-pix">
+  <input type="text" name="nome" placeholder="Seu nome" required style="width:100%;padding:10px;border-radius:8px;margin-bottom:8px;">
+  <input type="email" name="email" placeholder="Seu e-mail" required style="width:100%;padding:10px;border-radius:8px;margin-bottom:8px;">
+  <select name="produto" required style="width:100%;padding:10px;border-radius:8px;margin-bottom:8px;">
+    <option value="">Produto comprado</option>
+    <option>HD Retrô</option>
+    <option>HD Premium</option>
+    <option>HD ULTRA</option>
+  </select>
+  <input type="file" name="comprovante" required style="margin-bottom:12px;">
+  <button type="submit">Enviar comprovante</button>
+</form>
+    <br><br>
+    <button onclick="fecharPix()" style="background:#333;">Fechar</button>
+  </div>
+</div>
+
+<script>
+  function abrirPix() {
+    document.getElementById('pixModal').style.display = 'flex';
+  }
+  function fecharPix() {
+    document.getElementById('pixModal').style.display = 'none';
+  }
+</script>
+
 </body>
 </html>
+
