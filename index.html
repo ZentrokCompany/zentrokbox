@@ -10,7 +10,8 @@
 
 <style>
 :root{
-  --roxo:#6a2cff;
+  --roxo1:#6a2cff;
+  --roxo2:#8b6bff;
   --bg:#0b0b14;
   --card:#151522;
   --ok:#3cff8f;
@@ -23,112 +24,163 @@ body{
   background:radial-gradient(circle at top,#1a1235,#07070c);
   color:#fff;
 }
-.container{max-width:1100px;margin:auto;padding:20px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+header{
+  background:linear-gradient(135deg,var(--roxo1),var(--roxo2));
+  padding:30px 0;
+}
+.container{max-width:1150px;margin:auto;padding:0 20px}
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.logo{
+  width:54px;height:54px;border-radius:14px;
+  background:#ffffff22;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:1.4rem
+}
+.tabs{display:flex;gap:10px}
+.tab{
+  background:none;border:none;color:#fff;
+  opacity:.7;font-weight:600;
+  padding:10px 14px;border-radius:10px;
+  cursor:pointer
+}
+.tab.active,.tab:hover{background:#ffffff22;opacity:1}
+
+section{padding:70px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
 .card{
   background:linear-gradient(180deg,#1a1a2e,#12121d);
-  padding:24px;
-  border-radius:22px;
-  position:relative;
+  padding:26px;border-radius:22px;
+  position:relative;overflow:hidden
 }
 .card::after{
   content:'';
   position:absolute;
   inset:auto -40% -40% auto;
-  width:120%;
-  height:120%;
-  background:radial-gradient(circle,var(--roxo),transparent 70%);
+  width:120%;height:120%;
+  background:radial-gradient(circle,var(--roxo1),transparent 70%);
   opacity:.15;
   pointer-events:none;
 }
+.price{font-size:1.8rem;font-weight:700;color:var(--roxo2)}
 button{
-  width:100%;
-  margin-top:16px;
-  padding:14px;
-  border:none;
+  width:100%;margin-top:16px;
+  padding:14px;border:none;
   border-radius:14px;
-  font-weight:600;
-  background:linear-gradient(135deg,#6a2cff,#8b6bff);
-  color:#fff;
-  cursor:pointer;
+  background:linear-gradient(135deg,var(--roxo1),var(--roxo2));
+  color:#fff;font-weight:600;
+  cursor:pointer
 }
-.price{font-size:1.6rem;font-weight:700;color:#8b6bff}
+.install{
+  background:#12121d;
+  padding:40px;
+  border-radius:22px
+}
+footer{
+  text-align:center;
+  padding:30px;
+  color:var(--muted);
+  border-top:1px solid #ffffff14
+}
 
 /* MODAIS */
 .modal-bg{
-  display:none;
-  position:fixed;
-  inset:0;
+  display:none;position:fixed;inset:0;
   background:#000000cc;
-  align-items:center;
-  justify-content:center;
-  z-index:10;
+  align-items:center;justify-content:center;
+  z-index:10
 }
 .modal{
   background:#12121d;
   padding:30px;
   border-radius:22px;
-  width:90%;
-  max-width:420px;
-  text-align:center;
+  width:90%;max-width:420px;
+  text-align:center
 }
 
 /* TRACKING */
-.tracking{
-  margin-top:20px;
-}
 .step{
-  display:flex;
+  display:flex;gap:10px;
   align-items:center;
-  gap:10px;
   margin:14px 0;
-  opacity:.4;
+  opacity:.4
 }
 .step.active{opacity:1}
 .dot{
   width:14px;height:14px;
   border-radius:50%;
-  background:#555;
+  background:#555
 }
 .step.active .dot{background:var(--ok)}
-.time{font-size:.9rem;color:var(--muted)}
+.time{font-size:.85rem;color:var(--muted)}
 </style>
 </head>
 
 <body>
 
-<div class="container">
-  <h1>Zentrok Box</h1>
-  <div class="grid">
+<header>
+  <div class="container top">
+    <div style="display:flex;gap:16px;align-items:center">
+      <div class="logo">Z</div>
+      <div>
+        <h1>Zentrok Box</h1>
+        <p>HDs gamers prontos • Plug and Play</p>
+      </div>
+    </div>
+    <nav class="tabs">
+      <button class="tab active" onclick="mostrarAba('comprar',this)">Compre seu HD</button>
+      <button class="tab" onclick="mostrarAba('instalar',this)">Como instalar</button>
+    </nav>
+  </div>
+</header>
 
+<section class="container aba" id="aba-comprar">
+  <h2>Escolha seu HD</h2>
+  <div class="grid">
     <div class="card">
       <h3>HD Retrô</h3>
       <div class="price">R$ 250</div>
       <button onclick="abrirPix('HD Retrô',250)">Comprar</button>
     </div>
-
     <div class="card">
       <h3>HD Premium</h3>
       <div class="price">R$ 300</div>
       <button onclick="abrirPix('HD Premium',300)">Comprar</button>
     </div>
-
     <div class="card">
       <h3>HD ULTRA</h3>
       <div class="price">R$ 350</div>
       <button onclick="abrirPix('HD ULTRA',350)">Comprar</button>
     </div>
-
   </div>
-</div>
+</section>
+
+<section class="container aba" id="aba-instalar" style="display:none">
+  <div class="install">
+    <h2>Como instalar</h2>
+    <ol>
+      <li>Conecte o HD</li>
+      <li>Entre na BIOS</li>
+      <li>Selecione o HD</li>
+      <li>Aproveite 🎮</li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  © 2026 Zentrok Box • Todos os direitos reservados
+</footer>
 
 <!-- PIX -->
 <div class="modal-bg" id="pixModal">
   <div class="modal">
     <h2 id="pixProduto"></h2>
     <p id="pixValor"></p>
-    <p>Chave Pix:</p>
-    <strong>SUA_CHAVE_PIX_ITAU</strong>
+    <p><strong>Pix Itaú</strong></p>
+    <p>SUA_CHAVE_PIX_ITAU</p>
     <button onclick="confirmarPagamento()">Já paguei</button>
   </div>
 </div>
@@ -138,8 +190,40 @@ button{
   <div class="modal">
     <h2>Acompanhe seu pedido</h2>
 
-    <div class="tracking">
-      <div class="step active" id="s1">
-        <div class="dot"></div>
-        <div>
-          <strong>Pedido confirma
+    <div class="step active" id="s1"><div class="dot"></div>Pedido confirmado</div>
+    <div class="step" id="s2"><div class="dot"></div>Preparando envio <span class="time">~10 min</span></div>
+    <div class="step" id="s3"><div class="dot"></div>Saiu para entrega <span class="time">~30 min</span></div>
+    <div class="step" id="s4"><div class="dot"></div>Entregue <span class="time">~45 min</span></div>
+
+    <button onclick="fecharTudo()" style="background:#333">Fechar</button>
+  </div>
+</div>
+
+<script>
+function mostrarAba(aba,btn){
+  document.getElementById('aba-comprar').style.display = aba==='comprar'?'block':'none';
+  document.getElementById('aba-instalar').style.display = aba==='instalar'?'block':'none';
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+}
+function abrirPix(produto,valor){
+  pixProduto.innerText=produto;
+  pixValor.innerText='Valor: R$ '+valor;
+  pixModal.style.display='flex';
+}
+function confirmarPagamento(){
+  pixModal.style.display='none';
+  trackModal.style.display='flex';
+  setTimeout(()=>s2.classList.add('active'),5000);
+  setTimeout(()=>s3.classList.add('active'),15000);
+  setTimeout(()=>s4.classList.add('active'),30000);
+}
+function fecharTudo(){
+  trackModal.style.display='none';
+  [s2,s3,s4].forEach(s=>s.classList.remove('active'));
+}
+</script>
+
+</body>
+</html>
+
