@@ -1,196 +1,145 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zentrok Box</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zentrok Box</title>
 
-  <!-- FAVICONS -->
-  <link rel="icon" href="favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="icon" href="favicon.ico">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --roxo:#6a2cff;
+  --bg:#0b0b14;
+  --card:#151522;
+  --ok:#3cff8f;
+  --muted:#aaa;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Poppins,sans-serif;
+  background:radial-gradient(circle at top,#1a1235,#07070c);
+  color:#fff;
+}
+.container{max-width:1100px;margin:auto;padding:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.card{
+  background:linear-gradient(180deg,#1a1a2e,#12121d);
+  padding:24px;
+  border-radius:22px;
+  position:relative;
+}
+.card::after{
+  content:'';
+  position:absolute;
+  inset:auto -40% -40% auto;
+  width:120%;
+  height:120%;
+  background:radial-gradient(circle,var(--roxo),transparent 70%);
+  opacity:.15;
+  pointer-events:none;
+}
+button{
+  width:100%;
+  margin-top:16px;
+  padding:14px;
+  border:none;
+  border-radius:14px;
+  font-weight:600;
+  background:linear-gradient(135deg,#6a2cff,#8b6bff);
+  color:#fff;
+  cursor:pointer;
+}
+.price{font-size:1.6rem;font-weight:700;color:#8b6bff}
 
-  <style>
-    :root{
-      --roxo1:#6a2cff;
-      --roxo2:#8b6bff;
-      --bg:#0b0b14;
-      --card:#151522;
-      --texto:#f4f4ff;
-      --muted:#b6b6d6;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:Poppins,sans-serif;
-      background:radial-gradient(circle at top,#1a1235,#07070c);
-      color:var(--texto)
-    }
-    header{
-      padding:40px 0;
-      background:linear-gradient(135deg,var(--roxo1),var(--roxo2))
-    }
-    .container{max-width:1150px;margin:auto;padding:0 20px}
-    .top{display:flex;justify-content:space-between;align-items:center}
-    .logo{
-      width:54px;height:54px;border-radius:14px;
-      background:#ffffff22;
-      display:flex;align-items:center;justify-content:center;
-      font-weight:700;font-size:1.4rem
-    }
-    section{padding:70px 0}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
-    .card{
-      background:linear-gradient(180deg,#1a1a2e,#12121d);
-      border-radius:22px;
-      padding:26px;
-      position:relative;
-      overflow:hidden
-    }
-    .card::after{
-      content:'';
-      position:absolute;
-      inset:auto -40% -40% auto;
-      width:120%;
-      height:120%;
-      background:radial-gradient(circle,var(--roxo1),transparent 70%);
-      opacity:.15;
-      pointer-events:none;
-    }
-    .price{font-size:1.8rem;font-weight:700;color:var(--roxo2)}
-    button{
-      width:100%;
-      margin-top:16px;
-      padding:14px;
-      border:none;
-      border-radius:14px;
-      font-weight:600;
-      background:linear-gradient(135deg,var(--roxo1),var(--roxo2));
-      color:#fff;
-      cursor:pointer
-    }
-    footer{
-      text-align:center;
-      padding:30px;
-      color:var(--muted)
-    }
+/* MODAIS */
+.modal-bg{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#000000cc;
+  align-items:center;
+  justify-content:center;
+  z-index:10;
+}
+.modal{
+  background:#12121d;
+  padding:30px;
+  border-radius:22px;
+  width:90%;
+  max-width:420px;
+  text-align:center;
+}
 
-    /* MODAL */
-    #pixModal{
-      display:none;
-      position:fixed;
-      inset:0;
-      background:#000000cc;
-      align-items:center;
-      justify-content:center;
-      z-index:10
-    }
-    .modal{
-      background:#12121d;
-      padding:30px;
-      border-radius:22px;
-      max-width:420px;
-      width:90%;
-      text-align:center
-    }
-    .qr{
-      margin:20px 0;
-      background:#fff;
-      padding:10px;
-      border-radius:12px
-    }
-    .pixKey{
-      background:#000;
-      padding:10px;
-      border-radius:10px;
-      font-size:.9rem;
-      word-break:break-all
-    }
-  </style>
+/* TRACKING */
+.tracking{
+  margin-top:20px;
+}
+.step{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:14px 0;
+  opacity:.4;
+}
+.step.active{opacity:1}
+.dot{
+  width:14px;height:14px;
+  border-radius:50%;
+  background:#555;
+}
+.step.active .dot{background:var(--ok)}
+.time{font-size:.9rem;color:var(--muted)}
+</style>
 </head>
 
 <body>
 
-<header>
-  <div class="container top">
-    <div style="display:flex;gap:16px;align-items:center">
-      <div class="logo">Z</div>
-      <div>
-        <h1>Zentrok Box</h1>
-        <p>HDs gamers prontos • Plug and Play</p>
-      </div>
-    </div>
-  </div>
-</header>
-
-<section class="container">
-  <h2>Escolha seu HD</h2>
+<div class="container">
+  <h1>Zentrok Box</h1>
   <div class="grid">
 
     <div class="card">
       <h3>HD Retrô</h3>
-      <p class="price">R$ 250</p>
+      <div class="price">R$ 250</div>
       <button onclick="abrirPix('HD Retrô',250)">Comprar</button>
     </div>
 
     <div class="card">
       <h3>HD Premium</h3>
-      <p class="price">R$ 300</p>
+      <div class="price">R$ 300</div>
       <button onclick="abrirPix('HD Premium',300)">Comprar</button>
     </div>
 
     <div class="card">
       <h3>HD ULTRA</h3>
-      <p class="price">R$ 350</p>
+      <div class="price">R$ 350</div>
       <button onclick="abrirPix('HD ULTRA',350)">Comprar</button>
     </div>
 
   </div>
-</section>
+</div>
 
-<footer>
-  © 2026 Zentrok Box
-</footer>
-
-<!-- MODAL PIX -->
-<div id="pixModal">
+<!-- PIX -->
+<div class="modal-bg" id="pixModal">
   <div class="modal">
     <h2 id="pixProduto"></h2>
     <p id="pixValor"></p>
-
-    <div class="qr">
-      <img id="pixQR" width="200">
-    </div>
-
-    <div class="pixKey" id="pixKey"></div>
-
-    <button onclick="fecharPix()" style="background:#333">Fechar</button>
+    <p>Chave Pix:</p>
+    <strong>SUA_CHAVE_PIX_ITAU</strong>
+    <button onclick="confirmarPagamento()">Já paguei</button>
   </div>
 </div>
 
-<script>
-  const CHAVE_PIX = "SUA_CHAVE_PIX_AQUI";
+<!-- TRACKING -->
+<div class="modal-bg" id="trackModal">
+  <div class="modal">
+    <h2>Acompanhe seu pedido</h2>
 
-  function abrirPix(produto, valor){
-    document.getElementById('pixProduto').innerText = produto;
-    document.getElementById('pixValor').innerText = "Valor: R$ " + valor;
-    document.getElementById('pixKey').innerText = CHAVE_PIX;
-
-    const payload = `00020126360014BR.GOV.BCB.PIX0114${CHAVE_PIX}520400005303986540${valor.toFixed(2).replace('.','')}5802BR5913ZENTROK BOX6009SAO PAULO62070503***6304`;
-
-    document.getElementById('pixQR').src =
-      "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" + encodeURIComponent(payload);
-
-    document.getElementById('pixModal').style.display = 'flex';
-  }
-
-  function fecharPix(){
-    document.getElementById('pixModal').style.display = 'none';
-  }
-</script>
-
-</body>
-</html>
-
+    <div class="tracking">
+      <div class="step active" id="s1">
+        <div class="dot"></div>
+        <div>
+          <strong>Pedido confirma
