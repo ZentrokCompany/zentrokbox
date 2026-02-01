@@ -8,7 +8,6 @@
 
 <style>
 :root{
-  /* ROXO MAIS ESCURO */
   --roxo:#4b1fd6;
   --roxo2:#6a4cff;
   --bg:#0b0b14;
@@ -29,7 +28,7 @@ body{
 /* HEADER */
 header{
   background:linear-gradient(135deg,var(--roxo),var(--roxo2));
-  padding:28px 40px;
+  padding:26px 40px;
 }
 .header-top{
   max-width:1200px;
@@ -38,8 +37,7 @@ header{
   justify-content:space-between;
   align-items:center;
 }
-.logo{display:flex;align-items:center;gap:14px}
-.logo svg{width:48px;height:48px}
+.logo{display:flex;align-items:center;gap:14px;font-weight:bold}
 nav{display:flex;gap:30px}
 nav button{
   background:none;
@@ -82,8 +80,6 @@ nav button.active{
   position:relative;
   overflow:hidden;
 }
-
-/* CAMADA DECORATIVA — NÃO INTERAGE */
 .card::after{
   content:'';
   position:absolute;
@@ -101,7 +97,7 @@ nav button.active{
   font-weight:bold;
 }
 
-/* 🔥 BOTÃO — AGORA SIM */
+/* BOTÃO */
 button.buy{
   margin-top:16px;
   width:100%;
@@ -112,10 +108,32 @@ button.buy{
   color:white;
   font-weight:bold;
   cursor:pointer;
-
-  /* CORREÇÃO FINAL */
   position:relative;
   z-index:10;
+}
+
+/* MODAL */
+#modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#000000cc;
+  z-index:9999;
+  align-items:center;
+  justify-content:center;
+}
+.modal-box{
+  background:#151522;
+  padding:30px;
+  border-radius:20px;
+  width:320px;
+  text-align:center;
+}
+
+/* STATUS */
+.status li{
+  margin:14px 0;
+  list-style:none;
 }
 
 /* FOOTER */
@@ -133,13 +151,7 @@ footer{
 
 <header>
   <div class="header-top">
-    <div class="logo">
-      <svg viewBox="0 0 100 100">
-        <rect x="5" y="5" width="90" height="90" rx="22" fill="none" stroke="white" stroke-width="6"/>
-        <path d="M28 30h44L32 70h44" fill="none" stroke="white" stroke-width="8"/>
-      </svg>
-      <strong>Zentrok Box</strong>
-    </div>
+    <div class="logo">ZENTROK BOX</div>
     <nav>
       <button class="active" onclick="trocarAba('comprar',this)">Compre seu HD</button>
       <button onclick="trocarAba('instalar',this)">Como instalar</button>
@@ -150,29 +162,62 @@ footer{
 <section class="section active" id="comprar">
   <div class="hero">
     <h1>HD Gamer Plug & Play</h1>
-    <p>Sistemas prontos, conectou, jogou.</p>
+    <p>Conectou, ligou, jogou.</p>
   </div>
 
   <div class="grid">
     <div class="card">
       <h3>HD Retrô</h3>
       <div class="price">R$ 250</div>
-      <button class="buy" onclick="alert('HD Retrô')">Comprar</button>
+      <button class="buy" onclick="comprar('HD Retrô',250)">Comprar</button>
     </div>
 
     <div class="card">
       <h3>HD Premium</h3>
       <div class="price">R$ 300</div>
-      <button class="buy" onclick="alert('HD Premium')">Comprar</button>
+      <button class="buy" onclick="comprar('HD Premium',300)">Comprar</button>
     </div>
 
     <div class="card">
-      <h3>HD ULTRA</h3>
+      <h3>HD Ultra</h3>
       <div class="price">R$ 350</div>
-      <button class="buy" onclick="alert('HD ULTRA')">Comprar</button>
+      <button class="buy" onclick="comprar('HD Ultra',350)">Comprar</button>
     </div>
   </div>
 </section>
+
+<section class="section" id="instalar">
+  <h1>Como instalar</h1>
+  <p>Conecte o HD → ligue o PC → escolha o boot → pronto.</p>
+</section>
+
+<section class="section" id="statusPedido">
+  <h1>📦 Acompanhamento do pedido</h1>
+  <ul class="status">
+    <li id="s0">✔ Pagamento recebido</li>
+    <li id="s1">⏳ Preparando HD</li>
+    <li id="s2">⏳ Saiu para entrega</li>
+    <li id="s3">⏳ Entregue</li>
+  </ul>
+</section>
+
+<!-- MODAL -->
+<div id="modal">
+  <div class="modal-box">
+    <h2 id="produtoNome"></h2>
+    <p id="produtoValor"></p>
+
+    <img src="SEU_QRCODE_PIX.png" style="width:220px;margin:20px 0">
+
+    <p style="font-size:.85rem;color:#aaa">
+      Chave PIX:<br>
+      <strong>SUA_CHAVE_PIX_ITAU</strong>
+    </p>
+
+    <button class="buy" onclick="confirmarPagamento()">Já paguei</button><br><br>
+    <button onclick="fecharModal()" style="background:none;border:none;color:#aaa;cursor:pointer">Cancelar</button>
+  </div>
+</div>
 
 <footer>
 © 2026 Zentrok Box — Todos os direitos reservados
@@ -183,10 +228,29 @@ function trocarAba(id,btn){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
+  if(btn) btn.classList.add('active');
+}
+
+function comprar(nome,valor){
+  document.getElementById('produtoNome').innerText = nome;
+  document.getElementById('produtoValor').innerText = 'Valor: R$ ' + valor;
+  document.getElementById('modal').style.display = 'flex';
+}
+
+function fecharModal(){
+  document.getElementById('modal').style.display = 'none';
+}
+
+function confirmarPagamento(){
+  fecharModal();
+  trocarAba('statusPedido');
+  setTimeout(()=>s1.innerText='✔ HD preparado',3000);
+  setTimeout(()=>s2.innerText='✔ Saiu para entrega',7000);
+  setTimeout(()=>s3.innerText='✔ Entregue',12000);
 }
 </script>
 
 </body>
 </html>
+
 
