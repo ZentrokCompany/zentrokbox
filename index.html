@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zentrok Box</title>
+<title>Zentrok Box — HD Gamer Plug & Play</title>
 
 <!-- FAVICON -->
 <link rel="icon" href="favicon.ico">
@@ -11,9 +11,10 @@
 <style>
 :root{
   --roxo:#6a2cff;
+  --roxo2:#8b6bff;
   --bg:#0b0b14;
   --card:#151522;
-  --txt:#fff;
+  --txt:#f4f4ff;
   --muted:#aaa;
   --ok:#3cff8f;
 }
@@ -27,16 +28,30 @@ body{
   color:var(--txt);
 }
 
-/* TOPO */
+/* ===== HEADER ===== */
 header{
+  background:linear-gradient(135deg,var(--roxo),var(--roxo2));
+  padding:28px 40px;
+  box-shadow:0 20px 60px #0008;
+}
+.header-top{
+  max-width:1200px;
+  margin:auto;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:20px 40px;
 }
 .logo{
-  font-size:1.4rem;
-  font-weight:bold;
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.logo svg{
+  width:48px;
+  height:48px;
+}
+.logo strong{
+  font-size:1.5rem;
 }
 nav{
   display:flex;
@@ -45,37 +60,54 @@ nav{
 nav button{
   background:none;
   border:none;
-  color:#fff;
+  color:white;
   font-size:1rem;
   cursor:pointer;
-  opacity:.7;
+  opacity:.8;
 }
 nav button.active{
   opacity:1;
-  border-bottom:2px solid var(--roxo);
+  border-bottom:2px solid white;
   padding-bottom:4px;
 }
 
-/* CONTEÚDO */
-.container{
-  max-width:1100px;
+/* ===== SEÇÕES ===== */
+.section{
+  display:none;
+  max-width:1200px;
   margin:auto;
-  padding:30px;
+  padding:60px 30px;
 }
-.section{display:none}
 .section.active{display:block}
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
+h1,h2,h3{margin-top:0}
+
+.hero{
+  text-align:center;
+  margin-bottom:60px;
+}
+.hero h1{
+  font-size:3rem;
+}
+.hero p{
+  color:var(--muted);
+  max-width:700px;
+  margin:auto;
 }
 
+/* ===== PRODUTOS ===== */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;
+}
 .card{
   background:linear-gradient(180deg,#1a1a2e,#12121d);
-  padding:24px;
-  border-radius:20px;
+  border-radius:22px;
+  padding:28px;
+  box-shadow:0 30px 70px #0007;
   position:relative;
+  overflow:hidden;
 }
 .card::after{
   content:'';
@@ -85,52 +117,49 @@ nav button.active{
   height:120%;
   background:radial-gradient(circle,var(--roxo),transparent 70%);
   opacity:.15;
-  pointer-events:none;
 }
-
 .price{
-  font-size:1.6rem;
+  font-size:1.8rem;
+  color:var(--roxo2);
   font-weight:bold;
-  color:#8b6bff;
-  margin:10px 0;
 }
-
 button.buy{
+  margin-top:16px;
   width:100%;
   padding:14px;
   border:none;
   border-radius:14px;
-  background:linear-gradient(135deg,#6a2cff,#8b6bff);
-  color:#fff;
+  background:linear-gradient(135deg,var(--roxo),var(--roxo2));
+  color:white;
   font-weight:bold;
   cursor:pointer;
 }
 
-/* MODAL */
+/* ===== MODAIS ===== */
 .modal-bg{
   display:none;
   position:fixed;
   inset:0;
-  background:#000000cc;
+  background:#000c;
   align-items:center;
   justify-content:center;
-  z-index:10;
+  z-index:20;
 }
 .modal{
   background:#12121d;
-  padding:30px;
-  border-radius:20px;
+  border-radius:22px;
+  padding:32px;
+  max-width:480px;
   width:90%;
-  max-width:420px;
   text-align:center;
 }
 
-/* TRACKING */
+/* ===== TRACKING ===== */
 .status{
   display:flex;
   align-items:center;
   gap:12px;
-  margin:14px 0;
+  margin:16px 0;
   opacity:.4;
 }
 .status.active{opacity:1}
@@ -142,10 +171,11 @@ button.buy{
 }
 .status.active .dot{background:var(--ok)}
 
-/* RODAPÉ */
+/* ===== FOOTER ===== */
 footer{
+  border-top:1px solid #ffffff14;
   text-align:center;
-  padding:20px;
+  padding:30px;
   color:var(--muted);
   font-size:.9rem;
 }
@@ -155,88 +185,95 @@ footer{
 <body>
 
 <header>
-  <div class="logo">Zentrok Box</div>
-  <nav>
-    <button class="active" onclick="trocarAba('comprar',this)">Compre seu HD</button>
-    <button onclick="trocarAba('instalar',this)">Como instalar</button>
-  </nav>
+  <div class="header-top">
+    <div class="logo">
+      <!-- LOGO SVG -->
+      <svg viewBox="0 0 100 100">
+        <rect x="5" y="5" width="90" height="90" rx="22" fill="none" stroke="white" stroke-width="6"/>
+        <path d="M28 30h44L32 70h44" fill="none" stroke="white" stroke-width="8" stroke-linecap="round"/>
+      </svg>
+      <strong>Zentrok Box</strong>
+    </div>
+    <nav>
+      <button class="active" onclick="trocarAba('comprar',this)">Compre seu HD</button>
+      <button onclick="trocarAba('instalar',this)">Como instalar</button>
+      <button onclick="trocarAba('sobre',this)">Sobre</button>
+    </nav>
+  </div>
 </header>
 
-<div class="container">
+<!-- ===== COMPRAR ===== -->
+<section class="section active" id="comprar">
+  <div class="hero">
+    <h1>HD Gamer Plug & Play</h1>
+    <p>Sistemas prontos, configurados e testados. Conectou, ligou, jogou.</p>
+  </div>
 
-  <!-- ABA COMPRAR -->
-  <div class="section active" id="comprar">
-    <div class="grid">
-      <div class="card">
-        <h3>HD Retrô</h3>
-        <p>Jogos clássicos</p>
-        <div class="price">R$ 250</div>
-        <button class="buy" onclick="abrirPix('HD Retrô','250')">Comprar</button>
-      </div>
+  <div class="grid">
+    <div class="card">
+      <h3>HD Retrô</h3>
+      <p>Atari • MAME • PS1</p>
+      <div class="price">R$ 250</div>
+      <button class="buy" onclick="abrirPix('HD Retrô','250')">Comprar</button>
+    </div>
 
-      <div class="card">
-        <h3>HD Premium</h3>
-        <p>Mais consoles</p>
-        <div class="price">R$ 300</div>
-        <button class="buy" onclick="abrirPix('HD Premium','300')">Comprar</button>
-      </div>
+    <div class="card">
+      <h3>HD Premium</h3>
+      <p>Até PS2, PSP e Xbox Clássico</p>
+      <div class="price">R$ 300</div>
+      <button class="buy" onclick="abrirPix('HD Premium','300')">Comprar</button>
+    </div>
 
-      <div class="card">
-        <h3>HD ULTRA</h3>
-        <p>Completo</p>
-        <div class="price">R$ 350</div>
-        <button class="buy" onclick="abrirPix('HD ULTRA','350')">Comprar</button>
-      </div>
+    <div class="card">
+      <h3>HD ULTRA</h3>
+      <p>Catálogo máximo</p>
+      <div class="price">R$ 350</div>
+      <button class="buy" onclick="abrirPix('HD ULTRA','350')">Comprar</button>
     </div>
   </div>
+</section>
 
-  <!-- ABA INSTALAÇÃO -->
-  <div class="section" id="instalar">
-    <h2>Como instalar</h2>
-    <p>1. Conecte o HD no PC ou console</p>
-    <p>2. Ligue o equipamento</p>
-    <p>3. Selecione o HD no boot</p>
-    <p>4. Pronto 🎮</p>
-  </div>
+<!-- ===== INSTALAR ===== -->
+<section class="section" id="instalar">
+  <h2>Como instalar</h2>
+  <p>1. Conecte o HD</p>
+  <p>2. Ligue o PC ou console</p>
+  <p>3. Selecione o HD no boot</p>
+  <p>4. Pronto 🎮</p>
+</section>
 
-</div>
+<!-- ===== SOBRE ===== -->
+<section class="section" id="sobre">
+  <h2>Sobre a Zentrok Box</h2>
+  <p>Projeto focado em preservar jogos e facilitar o acesso a bibliotecas completas.</p>
+</section>
 
-<!-- MODAL PIX -->
+<!-- ===== PIX ===== -->
 <div class="modal-bg" id="pixModal">
   <div class="modal">
     <h2 id="pixProduto"></h2>
     <p id="pixValor"></p>
-    <p>Chave Pix (Itaú):</p>
+    <p>Pix Itaú:</p>
     <strong>SUA_CHAVE_PIX_ITAU</strong>
-    <p style="margin-top:10px;font-size:.9rem;color:#aaa">
-      Após o pagamento, você será redirecionado para o acompanhamento do pedido.
+    <p style="color:#aaa;font-size:.9rem;margin-top:12px">
+      Após pagar, acompanhe o status do pedido.
     </p>
-    <button class="buy" onclick="irParaTracking()">Ir para acompanhamento</button>
+    <button class="buy" onclick="abrirTracking()">Acompanhar pedido</button>
   </div>
 </div>
 
-<!-- TRACKING -->
+<!-- ===== TRACKING ===== -->
 <div class="modal-bg" id="trackModal">
   <div class="modal">
-    <h2>Acompanhamento</h2>
+    <h2>Status do pedido</h2>
 
-    <div class="status active">
-      <div class="dot"></div>Aguardando pagamento
-    </div>
-    <div class="status">
-      <div class="dot"></div>Pagamento confirmado
-    </div>
-    <div class="status">
-      <div class="dot"></div>Preparando envio
-    </div>
-    <div class="status">
-      <div class="dot"></div>Pedido enviado
-    </div>
-    <div class="status">
-      <div class="dot"></div>Pedido entregue
-    </div>
+    <div class="status active"><div class="dot"></div>Aguardando pagamento</div>
+    <div class="status"><div class="dot"></div>Pagamento confirmado</div>
+    <div class="status"><div class="dot"></div>Preparando envio</div>
+    <div class="status"><div class="dot"></div>Pedido enviado</div>
+    <div class="status"><div class="dot"></div>Pedido entregue</div>
 
-    <button style="margin-top:20px;background:#333" onclick="fecharTudo()">Fechar</button>
+    <button style="margin-top:20px;background:#333" onclick="fechar()">Fechar</button>
   </div>
 </div>
 
@@ -252,21 +289,22 @@ function trocarAba(id,btn){
   btn.classList.add('active');
 }
 
-function abrirPix(prod,valor){
-  document.getElementById('pixProduto').innerText = prod;
-  document.getElementById('pixValor').innerText = "Valor: R$ " + valor;
-  document.getElementById('pixModal').style.display = 'flex';
+function abrirPix(p,v){
+  pixProduto.innerText=p;
+  pixValor.innerText="Valor: R$ "+v;
+  pixModal.style.display='flex';
 }
 
-function irParaTracking(){
-  document.getElementById('pixModal').style.display = 'none';
-  document.getElementById('trackModal').style.display = 'flex';
+function abrirTracking(){
+  pixModal.style.display='none';
+  trackModal.style.display='flex';
 }
 
-function fecharTudo(){
-  document.getElementById('trackModal').style.display = 'none';
+function fechar(){
+  trackModal.style.display='none';
 }
 </script>
 
 </body>
 </html>
+
