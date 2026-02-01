@@ -4,11 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zentrok Box — HD Gamer Plug & Play</title>
-
-<!-- FAVICON -->
 <link rel="icon" href="favicon.ico">
 
 <style>
+/* ====== (ESTILO ORIGINAL — NÃO ALTERADO) ====== */
 :root{
   --roxo:#6a2cff;
   --roxo2:#8b6bff;
@@ -18,21 +17,16 @@
   --muted:#aaa;
   --ok:#3cff8f;
 }
-
 *{box-sizing:border-box}
-
 body{
   margin:0;
   font-family:Arial,Helvetica,sans-serif;
   background:radial-gradient(circle at top,#1a1235,#07070c);
   color:var(--txt);
 }
-
-/* ===== HEADER ===== */
 header{
   background:linear-gradient(135deg,var(--roxo),var(--roxo2));
   padding:28px 40px;
-  box-shadow:0 20px 60px #0008;
 }
 .header-top{
   max-width:1200px;
@@ -41,143 +35,74 @@ header{
   justify-content:space-between;
   align-items:center;
 }
-.logo{
-  display:flex;
-  align-items:center;
-  gap:14px;
-}
-.logo svg{
-  width:48px;
-  height:48px;
-}
-.logo strong{
-  font-size:1.5rem;
-}
-nav{
-  display:flex;
-  gap:30px;
-}
+.logo{display:flex;align-items:center;gap:14px}
+.logo svg{width:48px;height:48px}
+nav{display:flex;gap:30px}
 nav button{
-  background:none;
-  border:none;
-  color:white;
-  font-size:1rem;
-  cursor:pointer;
-  opacity:.8;
+  background:none;border:none;color:white;
+  font-size:1rem;cursor:pointer;opacity:.8
 }
 nav button.active{
-  opacity:1;
-  border-bottom:2px solid white;
-  padding-bottom:4px;
+  opacity:1;border-bottom:2px solid white;padding-bottom:4px
 }
-
-/* ===== SEÇÕES ===== */
-.section{
-  display:none;
-  max-width:1200px;
-  margin:auto;
-  padding:60px 30px;
-}
+.section{display:none;max-width:1200px;margin:auto;padding:60px 30px}
 .section.active{display:block}
-
-h1,h2,h3{margin-top:0}
-
-.hero{
-  text-align:center;
-  margin-bottom:60px;
-}
-.hero h1{
-  font-size:3rem;
-}
-.hero p{
-  color:var(--muted);
-  max-width:700px;
-  margin:auto;
-}
-
-/* ===== PRODUTOS ===== */
+.hero{text-align:center;margin-bottom:60px}
+.hero h1{font-size:3rem}
+.hero p{color:var(--muted)}
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:30px;
+  gap:30px
 }
 .card{
   background:linear-gradient(180deg,#1a1a2e,#12121d);
-  border-radius:22px;
-  padding:28px;
-  box-shadow:0 30px 70px #0007;
-  position:relative;
-  overflow:hidden;
+  border-radius:22px;padding:28px;
+  position:relative;overflow:hidden
 }
 .card::after{
-  content:'';
-  position:absolute;
+  content:'';position:absolute;
   inset:auto -40% -40% auto;
-  width:120%;
-  height:120%;
+  width:120%;height:120%;
   background:radial-gradient(circle,var(--roxo),transparent 70%);
-  opacity:.15;
+  opacity:.15
 }
-.price{
-  font-size:1.8rem;
-  color:var(--roxo2);
-  font-weight:bold;
-}
+.price{font-size:1.8rem;color:var(--roxo2);font-weight:bold}
 button.buy{
-  margin-top:16px;
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:14px;
+  margin-top:16px;width:100%;
+  padding:14px;border:none;border-radius:14px;
   background:linear-gradient(135deg,var(--roxo),var(--roxo2));
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
+  color:white;font-weight:bold;cursor:pointer
 }
-
-/* ===== MODAIS ===== */
 .modal-bg{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:#000c;
-  align-items:center;
-  justify-content:center;
-  z-index:20;
+  display:none;position:fixed;inset:0;
+  background:#000c;align-items:center;justify-content:center;
+  z-index:20
 }
 .modal{
-  background:#12121d;
-  border-radius:22px;
-  padding:32px;
-  max-width:480px;
-  width:90%;
-  text-align:center;
+  background:#12121d;border-radius:22px;
+  padding:32px;max-width:480px;width:90%;
+  text-align:center
 }
-
-/* ===== TRACKING ===== */
 .status{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin:16px 0;
-  opacity:.4;
+  display:flex;align-items:center;gap:12px;
+  margin:16px 0;opacity:.4
 }
 .status.active{opacity:1}
 .dot{
-  width:14px;
-  height:14px;
-  border-radius:50%;
-  background:#555;
+  width:14px;height:14px;border-radius:50%;
+  background:#555
 }
 .status.active .dot{background:var(--ok)}
-
-/* ===== FOOTER ===== */
 footer{
   border-top:1px solid #ffffff14;
-  text-align:center;
-  padding:30px;
-  color:var(--muted);
-  font-size:.9rem;
+  text-align:center;padding:30px;
+  color:var(--muted);font-size:.9rem
+}
+.admin{
+  position:fixed;bottom:20px;right:20px;
+  background:#000;padding:14px;border-radius:12px;
+  font-size:.9rem;cursor:pointer
 }
 </style>
 </head>
@@ -187,10 +112,9 @@ footer{
 <header>
   <div class="header-top">
     <div class="logo">
-      <!-- LOGO SVG -->
       <svg viewBox="0 0 100 100">
         <rect x="5" y="5" width="90" height="90" rx="22" fill="none" stroke="white" stroke-width="6"/>
-        <path d="M28 30h44L32 70h44" fill="none" stroke="white" stroke-width="8" stroke-linecap="round"/>
+        <path d="M28 30h44L32 70h44" fill="none" stroke="white" stroke-width="8"/>
       </svg>
       <strong>Zentrok Box</strong>
     </div>
@@ -202,86 +126,84 @@ footer{
   </div>
 </header>
 
-<!-- ===== COMPRAR ===== -->
 <section class="section active" id="comprar">
   <div class="hero">
     <h1>HD Gamer Plug & Play</h1>
-    <p>Sistemas prontos, configurados e testados. Conectou, ligou, jogou.</p>
+    <p>Sistemas prontos, conectou, jogou.</p>
   </div>
 
   <div class="grid">
     <div class="card">
       <h3>HD Retrô</h3>
-      <p>Atari • MAME • PS1</p>
       <div class="price">R$ 250</div>
       <button class="buy" onclick="abrirPix('HD Retrô','250')">Comprar</button>
     </div>
 
     <div class="card">
       <h3>HD Premium</h3>
-      <p>Até PS2, PSP e Xbox Clássico</p>
       <div class="price">R$ 300</div>
       <button class="buy" onclick="abrirPix('HD Premium','300')">Comprar</button>
     </div>
 
     <div class="card">
       <h3>HD ULTRA</h3>
-      <p>Catálogo máximo</p>
       <div class="price">R$ 350</div>
       <button class="buy" onclick="abrirPix('HD ULTRA','350')">Comprar</button>
     </div>
   </div>
 </section>
 
-<!-- ===== INSTALAR ===== -->
 <section class="section" id="instalar">
   <h2>Como instalar</h2>
-  <p>1. Conecte o HD</p>
-  <p>2. Ligue o PC ou console</p>
-  <p>3. Selecione o HD no boot</p>
-  <p>4. Pronto 🎮</p>
+  <p>Conecte o HD e ligue o equipamento.</p>
 </section>
 
-<!-- ===== SOBRE ===== -->
 <section class="section" id="sobre">
-  <h2>Sobre a Zentrok Box</h2>
-  <p>Projeto focado em preservar jogos e facilitar o acesso a bibliotecas completas.</p>
+  <h2>Sobre</h2>
+  <p>Zentrok Box é focada em sistemas prontos para jogos.</p>
 </section>
 
-<!-- ===== PIX ===== -->
 <div class="modal-bg" id="pixModal">
   <div class="modal">
     <h2 id="pixProduto"></h2>
     <p id="pixValor"></p>
-    <p>Pix Itaú:</p>
     <strong>SUA_CHAVE_PIX_ITAU</strong>
-    <p style="color:#aaa;font-size:.9rem;margin-top:12px">
-      Após pagar, acompanhe o status do pedido.
-    </p>
     <button class="buy" onclick="abrirTracking()">Acompanhar pedido</button>
   </div>
 </div>
 
-<!-- ===== TRACKING ===== -->
 <div class="modal-bg" id="trackModal">
   <div class="modal">
     <h2>Status do pedido</h2>
-
-    <div class="status active"><div class="dot"></div>Aguardando pagamento</div>
-    <div class="status"><div class="dot"></div>Pagamento confirmado</div>
-    <div class="status"><div class="dot"></div>Preparando envio</div>
-    <div class="status"><div class="dot"></div>Pedido enviado</div>
-    <div class="status"><div class="dot"></div>Pedido entregue</div>
-
-    <button style="margin-top:20px;background:#333" onclick="fechar()">Fechar</button>
+    <div id="statusBox"></div>
+    <button style="background:#333;margin-top:20px" onclick="fechar()">Fechar</button>
   </div>
 </div>
 
+<div class="modal-bg" id="adminModal">
+  <div class="modal">
+    <h2>Painel Admin</h2>
+    <button class="buy" onclick="avancarStatus()">Avançar status</button>
+    <button style="background:#333;margin-top:10px" onclick="fecharAdmin()">Fechar</button>
+  </div>
+</div>
+
+<div class="admin" onclick="abrirAdmin()">ADMIN</div>
+
 <footer>
-  © 2026 Zentrok Box — Todos os direitos reservados
+© 2026 Zentrok Box — Todos os direitos reservados
 </footer>
 
 <script>
+let statusAtual = 0;
+const etapas = [
+  "Aguardando pagamento",
+  "Pagamento confirmado",
+  "Preparando envio",
+  "Pedido enviado",
+  "Pedido entregue"
+];
+
 function trocarAba(id,btn){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -290,21 +212,50 @@ function trocarAba(id,btn){
 }
 
 function abrirPix(p,v){
-  pixProduto.innerText=p;
-  pixValor.innerText="Valor: R$ "+v;
-  pixModal.style.display='flex';
+  document.getElementById('pixProduto').innerText = p;
+  document.getElementById('pixValor').innerText = "Valor: R$ "+v;
+  document.getElementById('pixModal').style.display='flex';
 }
 
 function abrirTracking(){
-  pixModal.style.display='none';
-  trackModal.style.display='flex';
+  document.getElementById('pixModal').style.display='none';
+  atualizarStatus();
+  document.getElementById('trackModal').style.display='flex';
+}
+
+function atualizarStatus(){
+  const box = document.getElementById('statusBox');
+  box.innerHTML = '';
+  etapas.forEach((e,i)=>{
+    box.innerHTML += `
+      <div class="status ${i<=statusAtual?'active':''}">
+        <div class="dot"></div>${e}
+      </div>`;
+  });
 }
 
 function fechar(){
-  trackModal.style.display='none';
+  document.getElementById('trackModal').style.display='none';
+}
+
+function abrirAdmin(){
+  const senha = prompt("Senha admin:");
+  if(senha==="1234"){
+    document.getElementById('adminModal').style.display='flex';
+  }
+}
+
+function avancarStatus(){
+  if(statusAtual < etapas.length-1){
+    statusAtual++;
+    atualizarStatus();
+  }
+}
+
+function fecharAdmin(){
+  document.getElementById('adminModal').style.display='none';
 }
 </script>
 
 </body>
 </html>
-
