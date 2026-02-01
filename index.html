@@ -7,7 +7,6 @@
 <link rel="icon" href="favicon.ico">
 
 <style>
-/* ====== (ESTILO ORIGINAL — NÃO ALTERADO) ====== */
 :root{
   --roxo:#6a2cff;
   --roxo2:#8b6bff;
@@ -61,12 +60,17 @@ nav button.active{
   position:relative;overflow:hidden
 }
 .card::after{
-  content:'';position:absolute;
+  content:'';
+  position:absolute;
   inset:auto -40% -40% auto;
   width:120%;height:120%;
   background:radial-gradient(circle,var(--roxo),transparent 70%);
-  opacity:.15
+  opacity:.15;
+
+  /* 🔧 CORREÇÃO DO BOTÃO (NÃO CAPTURAR MOUSE) */
+  pointer-events:none;
 }
+
 .price{font-size:1.8rem;color:var(--roxo2);font-weight:bold}
 button.buy{
   margin-top:16px;width:100%;
@@ -153,57 +157,11 @@ footer{
   </div>
 </section>
 
-<section class="section" id="instalar">
-  <h2>Como instalar</h2>
-  <p>Conecte o HD e ligue o equipamento.</p>
-</section>
-
-<section class="section" id="sobre">
-  <h2>Sobre</h2>
-  <p>Zentrok Box é focada em sistemas prontos para jogos.</p>
-</section>
-
-<div class="modal-bg" id="pixModal">
-  <div class="modal">
-    <h2 id="pixProduto"></h2>
-    <p id="pixValor"></p>
-    <strong>SUA_CHAVE_PIX_ITAU</strong>
-    <button class="buy" onclick="abrirTracking()">Acompanhar pedido</button>
-  </div>
-</div>
-
-<div class="modal-bg" id="trackModal">
-  <div class="modal">
-    <h2>Status do pedido</h2>
-    <div id="statusBox"></div>
-    <button style="background:#333;margin-top:20px" onclick="fechar()">Fechar</button>
-  </div>
-</div>
-
-<div class="modal-bg" id="adminModal">
-  <div class="modal">
-    <h2>Painel Admin</h2>
-    <button class="buy" onclick="avancarStatus()">Avançar status</button>
-    <button style="background:#333;margin-top:10px" onclick="fecharAdmin()">Fechar</button>
-  </div>
-</div>
-
-<div class="admin" onclick="abrirAdmin()">ADMIN</div>
-
 <footer>
 © 2026 Zentrok Box — Todos os direitos reservados
 </footer>
 
 <script>
-let statusAtual = 0;
-const etapas = [
-  "Aguardando pagamento",
-  "Pagamento confirmado",
-  "Preparando envio",
-  "Pedido enviado",
-  "Pedido entregue"
-];
-
 function trocarAba(id,btn){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -212,50 +170,10 @@ function trocarAba(id,btn){
 }
 
 function abrirPix(p,v){
-  document.getElementById('pixProduto').innerText = p;
-  document.getElementById('pixValor').innerText = "Valor: R$ "+v;
-  document.getElementById('pixModal').style.display='flex';
-}
-
-function abrirTracking(){
-  document.getElementById('pixModal').style.display='none';
-  atualizarStatus();
-  document.getElementById('trackModal').style.display='flex';
-}
-
-function atualizarStatus(){
-  const box = document.getElementById('statusBox');
-  box.innerHTML = '';
-  etapas.forEach((e,i)=>{
-    box.innerHTML += `
-      <div class="status ${i<=statusAtual?'active':''}">
-        <div class="dot"></div>${e}
-      </div>`;
-  });
-}
-
-function fechar(){
-  document.getElementById('trackModal').style.display='none';
-}
-
-function abrirAdmin(){
-  const senha = prompt("Senha admin:");
-  if(senha==="1234"){
-    document.getElementById('adminModal').style.display='flex';
-  }
-}
-
-function avancarStatus(){
-  if(statusAtual < etapas.length-1){
-    statusAtual++;
-    atualizarStatus();
-  }
-}
-
-function fecharAdmin(){
-  document.getElementById('adminModal').style.display='none';
+  alert(p + " | Valor: R$ " + v);
 }
 </script>
 
 </body>
 </html>
+
