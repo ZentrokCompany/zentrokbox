@@ -5,225 +5,268 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zentrok Box</title>
 
+<!-- FAVICON -->
 <link rel="icon" href="favicon.ico">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --roxo1:#6a2cff;
-  --roxo2:#8b6bff;
+  --roxo:#6a2cff;
   --bg:#0b0b14;
   --card:#151522;
-  --ok:#3cff8f;
+  --txt:#fff;
   --muted:#aaa;
+  --ok:#3cff8f;
 }
+
 *{box-sizing:border-box}
+
 body{
   margin:0;
-  font-family:Poppins,sans-serif;
+  font-family:Arial,Helvetica,sans-serif;
   background:radial-gradient(circle at top,#1a1235,#07070c);
-  color:#fff;
+  color:var(--txt);
 }
+
+/* TOPO */
 header{
-  background:linear-gradient(135deg,var(--roxo1),var(--roxo2));
-  padding:30px 0;
-}
-.container{max-width:1150px;margin:auto;padding:0 20px}
-.top{
   display:flex;
   justify-content:space-between;
   align-items:center;
+  padding:20px 40px;
 }
 .logo{
-  width:54px;height:54px;border-radius:14px;
-  background:#ffffff22;
-  display:flex;align-items:center;justify-content:center;
-  font-weight:700;font-size:1.4rem
+  font-size:1.4rem;
+  font-weight:bold;
 }
-.tabs{display:flex;gap:10px}
-.tab{
-  background:none;border:none;color:#fff;
-  opacity:.7;font-weight:600;
-  padding:10px 14px;border-radius:10px;
-  cursor:pointer
+nav{
+  display:flex;
+  gap:30px;
 }
-.tab.active,.tab:hover{background:#ffffff22;opacity:1}
+nav button{
+  background:none;
+  border:none;
+  color:#fff;
+  font-size:1rem;
+  cursor:pointer;
+  opacity:.7;
+}
+nav button.active{
+  opacity:1;
+  border-bottom:2px solid var(--roxo);
+  padding-bottom:4px;
+}
 
-section{padding:70px 0}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+/* CONTEÚDO */
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:30px;
+}
+.section{display:none}
+.section.active{display:block}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
+}
+
 .card{
   background:linear-gradient(180deg,#1a1a2e,#12121d);
-  padding:26px;border-radius:22px;
-  position:relative;overflow:hidden
+  padding:24px;
+  border-radius:20px;
+  position:relative;
 }
 .card::after{
   content:'';
   position:absolute;
   inset:auto -40% -40% auto;
-  width:120%;height:120%;
-  background:radial-gradient(circle,var(--roxo1),transparent 70%);
+  width:120%;
+  height:120%;
+  background:radial-gradient(circle,var(--roxo),transparent 70%);
   opacity:.15;
   pointer-events:none;
 }
-.price{font-size:1.8rem;font-weight:700;color:var(--roxo2)}
-button{
-  width:100%;margin-top:16px;
-  padding:14px;border:none;
-  border-radius:14px;
-  background:linear-gradient(135deg,var(--roxo1),var(--roxo2));
-  color:#fff;font-weight:600;
-  cursor:pointer
-}
-.install{
-  background:#12121d;
-  padding:40px;
-  border-radius:22px
-}
-footer{
-  text-align:center;
-  padding:30px;
-  color:var(--muted);
-  border-top:1px solid #ffffff14
+
+.price{
+  font-size:1.6rem;
+  font-weight:bold;
+  color:#8b6bff;
+  margin:10px 0;
 }
 
-/* MODAIS */
+button.buy{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:14px;
+  background:linear-gradient(135deg,#6a2cff,#8b6bff);
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* MODAL */
 .modal-bg{
-  display:none;position:fixed;inset:0;
+  display:none;
+  position:fixed;
+  inset:0;
   background:#000000cc;
-  align-items:center;justify-content:center;
-  z-index:10
+  align-items:center;
+  justify-content:center;
+  z-index:10;
 }
 .modal{
   background:#12121d;
   padding:30px;
-  border-radius:22px;
-  width:90%;max-width:420px;
-  text-align:center
+  border-radius:20px;
+  width:90%;
+  max-width:420px;
+  text-align:center;
 }
 
 /* TRACKING */
-.step{
-  display:flex;gap:10px;
+.status{
+  display:flex;
   align-items:center;
+  gap:12px;
   margin:14px 0;
-  opacity:.4
+  opacity:.4;
 }
-.step.active{opacity:1}
+.status.active{opacity:1}
 .dot{
-  width:14px;height:14px;
+  width:14px;
+  height:14px;
   border-radius:50%;
-  background:#555
+  background:#555;
 }
-.step.active .dot{background:var(--ok)}
-.time{font-size:.85rem;color:var(--muted)}
+.status.active .dot{background:var(--ok)}
+
+/* RODAPÉ */
+footer{
+  text-align:center;
+  padding:20px;
+  color:var(--muted);
+  font-size:.9rem;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-  <div class="container top">
-    <div style="display:flex;gap:16px;align-items:center">
-      <div class="logo">Z</div>
-      <div>
-        <h1>Zentrok Box</h1>
-        <p>HDs gamers prontos • Plug and Play</p>
-      </div>
-    </div>
-    <nav class="tabs">
-      <button class="tab active" onclick="mostrarAba('comprar',this)">Compre seu HD</button>
-      <button class="tab" onclick="mostrarAba('instalar',this)">Como instalar</button>
-    </nav>
-  </div>
+  <div class="logo">Zentrok Box</div>
+  <nav>
+    <button class="active" onclick="trocarAba('comprar',this)">Compre seu HD</button>
+    <button onclick="trocarAba('instalar',this)">Como instalar</button>
+  </nav>
 </header>
 
-<section class="container aba" id="aba-comprar">
-  <h2>Escolha seu HD</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>HD Retrô</h3>
-      <div class="price">R$ 250</div>
-      <button onclick="abrirPix('HD Retrô',250)">Comprar</button>
-    </div>
-    <div class="card">
-      <h3>HD Premium</h3>
-      <div class="price">R$ 300</div>
-      <button onclick="abrirPix('HD Premium',300)">Comprar</button>
-    </div>
-    <div class="card">
-      <h3>HD ULTRA</h3>
-      <div class="price">R$ 350</div>
-      <button onclick="abrirPix('HD ULTRA',350)">Comprar</button>
+<div class="container">
+
+  <!-- ABA COMPRAR -->
+  <div class="section active" id="comprar">
+    <div class="grid">
+      <div class="card">
+        <h3>HD Retrô</h3>
+        <p>Jogos clássicos</p>
+        <div class="price">R$ 250</div>
+        <button class="buy" onclick="abrirPix('HD Retrô','250')">Comprar</button>
+      </div>
+
+      <div class="card">
+        <h3>HD Premium</h3>
+        <p>Mais consoles</p>
+        <div class="price">R$ 300</div>
+        <button class="buy" onclick="abrirPix('HD Premium','300')">Comprar</button>
+      </div>
+
+      <div class="card">
+        <h3>HD ULTRA</h3>
+        <p>Completo</p>
+        <div class="price">R$ 350</div>
+        <button class="buy" onclick="abrirPix('HD ULTRA','350')">Comprar</button>
+      </div>
     </div>
   </div>
-</section>
 
-<section class="container aba" id="aba-instalar" style="display:none">
-  <div class="install">
+  <!-- ABA INSTALAÇÃO -->
+  <div class="section" id="instalar">
     <h2>Como instalar</h2>
-    <ol>
-      <li>Conecte o HD</li>
-      <li>Entre na BIOS</li>
-      <li>Selecione o HD</li>
-      <li>Aproveite 🎮</li>
-    </ol>
+    <p>1. Conecte o HD no PC ou console</p>
+    <p>2. Ligue o equipamento</p>
+    <p>3. Selecione o HD no boot</p>
+    <p>4. Pronto 🎮</p>
   </div>
-</section>
 
-<footer>
-  © 2026 Zentrok Box • Todos os direitos reservados
-</footer>
+</div>
 
-<!-- PIX -->
+<!-- MODAL PIX -->
 <div class="modal-bg" id="pixModal">
   <div class="modal">
     <h2 id="pixProduto"></h2>
     <p id="pixValor"></p>
-    <p><strong>Pix Itaú</strong></p>
-    <p>SUA_CHAVE_PIX_ITAU</p>
-    <button onclick="confirmarPagamento()">Já paguei</button>
+    <p>Chave Pix (Itaú):</p>
+    <strong>SUA_CHAVE_PIX_ITAU</strong>
+    <p style="margin-top:10px;font-size:.9rem;color:#aaa">
+      Após o pagamento, você será redirecionado para o acompanhamento do pedido.
+    </p>
+    <button class="buy" onclick="irParaTracking()">Ir para acompanhamento</button>
   </div>
 </div>
 
 <!-- TRACKING -->
 <div class="modal-bg" id="trackModal">
   <div class="modal">
-    <h2>Acompanhe seu pedido</h2>
+    <h2>Acompanhamento</h2>
 
-    <div class="step active" id="s1"><div class="dot"></div>Pedido confirmado</div>
-    <div class="step" id="s2"><div class="dot"></div>Preparando envio <span class="time">~10 min</span></div>
-    <div class="step" id="s3"><div class="dot"></div>Saiu para entrega <span class="time">~30 min</span></div>
-    <div class="step" id="s4"><div class="dot"></div>Entregue <span class="time">~45 min</span></div>
+    <div class="status active">
+      <div class="dot"></div>Aguardando pagamento
+    </div>
+    <div class="status">
+      <div class="dot"></div>Pagamento confirmado
+    </div>
+    <div class="status">
+      <div class="dot"></div>Preparando envio
+    </div>
+    <div class="status">
+      <div class="dot"></div>Pedido enviado
+    </div>
+    <div class="status">
+      <div class="dot"></div>Pedido entregue
+    </div>
 
-    <button onclick="fecharTudo()" style="background:#333">Fechar</button>
+    <button style="margin-top:20px;background:#333" onclick="fecharTudo()">Fechar</button>
   </div>
 </div>
 
+<footer>
+  © 2026 Zentrok Box — Todos os direitos reservados
+</footer>
+
 <script>
-function mostrarAba(aba,btn){
-  document.getElementById('aba-comprar').style.display = aba==='comprar'?'block':'none';
-  document.getElementById('aba-instalar').style.display = aba==='instalar'?'block':'none';
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+function trocarAba(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
 }
-function abrirPix(produto,valor){
-  pixProduto.innerText=produto;
-  pixValor.innerText='Valor: R$ '+valor;
-  pixModal.style.display='flex';
+
+function abrirPix(prod,valor){
+  document.getElementById('pixProduto').innerText = prod;
+  document.getElementById('pixValor').innerText = "Valor: R$ " + valor;
+  document.getElementById('pixModal').style.display = 'flex';
 }
-function confirmarPagamento(){
-  pixModal.style.display='none';
-  trackModal.style.display='flex';
-  setTimeout(()=>s2.classList.add('active'),5000);
-  setTimeout(()=>s3.classList.add('active'),15000);
-  setTimeout(()=>s4.classList.add('active'),30000);
+
+function irParaTracking(){
+  document.getElementById('pixModal').style.display = 'none';
+  document.getElementById('trackModal').style.display = 'flex';
 }
+
 function fecharTudo(){
-  trackModal.style.display='none';
-  [s2,s3,s4].forEach(s=>s.classList.remove('active'));
+  document.getElementById('trackModal').style.display = 'none';
 }
 </script>
 
 </body>
 </html>
-
