@@ -3,26 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zentrok Box — HD Gamer Plug & Play</title>
+<title>Zentrok Box</title>
 <link rel="icon" href="favicon.ico">
 
 <style>
 :root{
-  --roxo:#6a2cff;
-  --roxo2:#8b6bff;
+  /* ROXO MAIS ESCURO */
+  --roxo:#4b1fd6;
+  --roxo2:#6a4cff;
   --bg:#0b0b14;
   --card:#151522;
   --txt:#f4f4ff;
   --muted:#aaa;
-  --ok:#3cff8f;
 }
+
 *{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:Arial,Helvetica,sans-serif;
-  background:radial-gradient(circle at top,#1a1235,#07070c);
+  background:radial-gradient(circle at top,#140f2e,#07070c);
   color:var(--txt);
 }
+
+/* HEADER */
 header{
   background:linear-gradient(135deg,var(--roxo),var(--roxo2));
   padding:28px 40px;
@@ -38,75 +42,89 @@ header{
 .logo svg{width:48px;height:48px}
 nav{display:flex;gap:30px}
 nav button{
-  background:none;border:none;color:white;
-  font-size:1rem;cursor:pointer;opacity:.8
+  background:none;
+  border:none;
+  color:white;
+  font-size:1rem;
+  cursor:pointer;
+  opacity:.8;
 }
 nav button.active{
-  opacity:1;border-bottom:2px solid white;padding-bottom:4px
+  opacity:1;
+  border-bottom:2px solid white;
+  padding-bottom:4px;
 }
-.section{display:none;max-width:1200px;margin:auto;padding:60px 30px}
+
+/* SEÇÕES */
+.section{
+  display:none;
+  max-width:1200px;
+  margin:auto;
+  padding:60px 30px;
+}
 .section.active{display:block}
+
 .hero{text-align:center;margin-bottom:60px}
 .hero h1{font-size:3rem}
 .hero p{color:var(--muted)}
+
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:30px
+  gap:30px;
 }
+
+/* CARD */
 .card{
   background:linear-gradient(180deg,#1a1a2e,#12121d);
-  border-radius:22px;padding:28px;
-  position:relative;overflow:hidden
+  border-radius:22px;
+  padding:28px;
+  position:relative;
+  overflow:hidden;
 }
+
+/* CAMADA DECORATIVA — NÃO INTERAGE */
 .card::after{
   content:'';
   position:absolute;
   inset:auto -40% -40% auto;
-  width:120%;height:120%;
+  width:120%;
+  height:120%;
   background:radial-gradient(circle,var(--roxo),transparent 70%);
   opacity:.15;
-
-  /* 🔧 CORREÇÃO DO BOTÃO (NÃO CAPTURAR MOUSE) */
   pointer-events:none;
 }
 
-.price{font-size:1.8rem;color:var(--roxo2);font-weight:bold}
+.price{
+  font-size:1.8rem;
+  color:var(--roxo2);
+  font-weight:bold;
+}
+
+/* 🔥 BOTÃO — AGORA SIM */
 button.buy{
-  margin-top:16px;width:100%;
-  padding:14px;border:none;border-radius:14px;
+  margin-top:16px;
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:14px;
   background:linear-gradient(135deg,var(--roxo),var(--roxo2));
-  color:white;font-weight:bold;cursor:pointer
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+
+  /* CORREÇÃO FINAL */
+  position:relative;
+  z-index:10;
 }
-.modal-bg{
-  display:none;position:fixed;inset:0;
-  background:#000c;align-items:center;justify-content:center;
-  z-index:20
-}
-.modal{
-  background:#12121d;border-radius:22px;
-  padding:32px;max-width:480px;width:90%;
-  text-align:center
-}
-.status{
-  display:flex;align-items:center;gap:12px;
-  margin:16px 0;opacity:.4
-}
-.status.active{opacity:1}
-.dot{
-  width:14px;height:14px;border-radius:50%;
-  background:#555
-}
-.status.active .dot{background:var(--ok)}
+
+/* FOOTER */
 footer{
   border-top:1px solid #ffffff14;
-  text-align:center;padding:30px;
-  color:var(--muted);font-size:.9rem
-}
-.admin{
-  position:fixed;bottom:20px;right:20px;
-  background:#000;padding:14px;border-radius:12px;
-  font-size:.9rem;cursor:pointer
+  text-align:center;
+  padding:30px;
+  color:var(--muted);
+  font-size:.9rem;
 }
 </style>
 </head>
@@ -125,7 +143,6 @@ footer{
     <nav>
       <button class="active" onclick="trocarAba('comprar',this)">Compre seu HD</button>
       <button onclick="trocarAba('instalar',this)">Como instalar</button>
-      <button onclick="trocarAba('sobre',this)">Sobre</button>
     </nav>
   </div>
 </header>
@@ -140,19 +157,19 @@ footer{
     <div class="card">
       <h3>HD Retrô</h3>
       <div class="price">R$ 250</div>
-      <button class="buy" onclick="abrirPix('HD Retrô','250')">Comprar</button>
+      <button class="buy" onclick="alert('HD Retrô')">Comprar</button>
     </div>
 
     <div class="card">
       <h3>HD Premium</h3>
       <div class="price">R$ 300</div>
-      <button class="buy" onclick="abrirPix('HD Premium','300')">Comprar</button>
+      <button class="buy" onclick="alert('HD Premium')">Comprar</button>
     </div>
 
     <div class="card">
       <h3>HD ULTRA</h3>
       <div class="price">R$ 350</div>
-      <button class="buy" onclick="abrirPix('HD ULTRA','350')">Comprar</button>
+      <button class="buy" onclick="alert('HD ULTRA')">Comprar</button>
     </div>
   </div>
 </section>
@@ -167,10 +184,6 @@ function trocarAba(id,btn){
   document.getElementById(id).classList.add('active');
   document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-}
-
-function abrirPix(p,v){
-  alert(p + " | Valor: R$ " + v);
 }
 </script>
 
