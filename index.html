@@ -1,256 +1,1222 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zentrok Box</title>
-<link rel="icon" href="favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zentrok Box - HDs Gamers Prontos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Rajdhani:wght@400;500;600;700&family=Russo+One&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Design Philosophy: Retrofuturismo Synthwave
+         * Paleta: roxo profundo → rosa neon → laranja elétrico + ciano
+         * Tipografia: Audiowide (títulos), Rajdhani (corpo), Russo One (CTAs)
+         */
 
-<style>
-:root{
-  --roxo:#4b1fd6;
-  --roxo2:#6a4cff;
-  --bg:#0b0b14;
-  --card:#151522;
-  --txt:#f4f4ff;
-  --muted:#aaa;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-*{box-sizing:border-box}
+        :root {
+            /* Synthwave Color Palette */
+            --primary: #ec4899;
+            --primary-light: #f472b6;
+            --secondary: #7c3aed;
+            --accent: #fb923c;
+            --cyan: #06b6d4;
+            --background: #0f0a1e;
+            --card-bg: #2d1b4e;
+            --border-color: #ec4899;
+            --text-primary: #f0f9ff;
+            --text-secondary: #a5f3fc;
+            --font-display: 'Audiowide', system-ui, sans-serif;
+            --font-body: 'Rajdhani', system-ui, sans-serif;
+            --font-accent: 'Russo One', system-ui, sans-serif;
+        }
 
-body{
-  margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:radial-gradient(circle at top,#140f2e,#07070c);
-  color:var(--txt);
-}
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(180deg, #0f0a1e 0%, #2d1b4e 50%, #0f0a1e 100%);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
 
-/* HEADER */
-header{
-  background:linear-gradient(135deg,var(--roxo),var(--roxo2));
-  padding:26px 40px;
-}
-.header-top{
-  max-width:1200px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-.logo{display:flex;align-items:center;gap:14px;font-weight:bold}
-nav{display:flex;gap:30px}
-nav button{
-  background:none;
-  border:none;
-  color:white;
-  font-size:1rem;
-  cursor:pointer;
-  opacity:.8;
-}
-nav button.active{
-  opacity:1;
-  border-bottom:2px solid white;
-  padding-bottom:4px;
-}
+        /* Neon Glow Effects */
+        .neon-glow {
+            text-shadow: 
+                0 0 10px currentColor,
+                0 0 20px currentColor,
+                0 0 40px currentColor;
+        }
 
-/* SEÇÕES */
-.section{
-  display:none;
-  max-width:1200px;
-  margin:auto;
-  padding:60px 30px;
-}
-.section.active{display:block}
+        .neon-border {
+            box-shadow: 
+                0 0 5px currentColor,
+                0 0 10px currentColor,
+                inset 0 0 5px currentColor;
+        }
 
-.hero{text-align:center;margin-bottom:60px}
-.hero h1{font-size:3rem}
-.hero p{color:var(--muted)}
+        /* Animations */
+        @keyframes neon-pulse {
+            0%, 100% { opacity: 1; filter: brightness(1); }
+            50% { opacity: 0.8; filter: brightness(1.2); }
+        }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:30px;
-}
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
 
-/* CARD */
-.card{
-  background:linear-gradient(180deg,#1a1a2e,#12121d);
-  border-radius:22px;
-  padding:28px;
-  position:relative;
-  overflow:hidden;
-}
-.card::after{
-  content:'';
-  position:absolute;
-  inset:auto -40% -40% auto;
-  width:120%;
-  height:120%;
-  background:radial-gradient(circle,var(--roxo),transparent 70%);
-  opacity:.15;
-  pointer-events:none;
-}
+        @keyframes glow-rotate {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
 
-.price{
-  font-size:1.8rem;
-  color:var(--roxo2);
-  font-weight:bold;
-}
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
 
-/* BOTÃO */
-button.buy{
-  margin-top:16px;
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:14px;
-  background:linear-gradient(135deg,var(--roxo),var(--roxo2));
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
-  position:relative;
-  z-index:10;
-}
+        .animate-neon-pulse {
+            animation: neon-pulse 2s ease-in-out infinite;
+        }
 
-/* MODAL */
-#modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:#000000cc;
-  z-index:9999;
-  align-items:center;
-  justify-content:center;
-}
-.modal-box{
-  background:#151522;
-  padding:30px;
-  border-radius:20px;
-  width:320px;
-  text-align:center;
-}
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
 
-/* STATUS */
-.status li{
-  margin:14px 0;
-  list-style:none;
-}
+        .animate-glow-rotate {
+            animation: glow-rotate 5s linear infinite;
+        }
 
-/* FOOTER */
-footer{
-  border-top:1px solid #ffffff14;
-  text-align:center;
-  padding:30px;
-  color:var(--muted);
-  font-size:.9rem;
-}
-</style>
+        /* Header */
+        header {
+            border-bottom: 2px solid rgba(236, 72, 153, 0.5);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            height: 80px;
+            animation: neon-pulse 2s ease-in-out infinite;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid rgba(124, 58, 237, 0.3);
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .nav-btn {
+            padding: 1rem 2rem;
+            font-family: var(--font-accent);
+            font-size: 1.125rem;
+            background: transparent;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-btn:hover {
+            color: var(--primary-light);
+        }
+
+        .nav-btn.active {
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+        }
+
+        .nav-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary), var(--accent));
+            box-shadow: 0 0 5px var(--primary), 0 0 10px var(--primary);
+        }
+
+        /* Main Content */
+        main {
+            position: relative;
+            z-index: 5;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+        }
+
+        /* Background Effects */
+        .background-effects {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .floating-shape {
+            position: absolute;
+            border: 4px solid;
+            opacity: 0.3;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .shape-1 {
+            width: 128px;
+            height: 128px;
+            border-color: var(--primary);
+            top: 80px;
+            left: 40px;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 96px;
+            height: 96px;
+            border-color: var(--cyan);
+            top: 160px;
+            right: 80px;
+            opacity: 0.2;
+            animation-delay: 1s;
+            transform: rotate(45deg);
+        }
+
+        .shape-3 {
+            width: 80px;
+            height: 80px;
+            border-color: var(--accent);
+            bottom: 160px;
+            left: 25%;
+            opacity: 0.25;
+            animation-delay: 2s;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            space: 1.5rem;
+            padding: 3rem 0;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            background: linear-gradient(to right, var(--primary-light), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            animation: glow-rotate 5s linear infinite;
+            text-shadow: 0 0 30px rgba(236, 72, 153, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--cyan);
+            font-family: var(--font-body);
+            max-width: 48rem;
+            margin: 0 auto;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .product-card {
+            background: linear-gradient(to bottom-right, rgba(124, 58, 237, 0.5), rgba(0, 0, 0, 0.5));
+            border: 2px solid rgba(236, 72, 153, 0.5);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: all 0.5s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .product-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(236, 72, 153, 0.5);
+            transform: scale(1.05);
+        }
+
+        .product-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background: rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            space: 1rem;
+        }
+
+        .product-name {
+            font-family: var(--font-accent);
+            font-size: 1.875rem;
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .product-features {
+            list-style: none;
+            space: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--cyan);
+            font-family: var(--font-body);
+        }
+
+        .product-features li::before {
+            content: '▸';
+            color: var(--accent);
+            flex-shrink: 0;
+            margin-top: 0.25rem;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 2px solid rgba(124, 58, 237, 0.5);
+        }
+
+        .product-price {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-label {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            font-family: var(--font-body);
+        }
+
+        .price-value {
+            font-family: var(--font-accent);
+            font-size: 2rem;
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .buy-btn {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            font-family: var(--font-accent);
+            font-size: 1rem;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            box-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
+        }
+
+        .buy-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.8);
+        }
+
+        /* Installation Section */
+        .install-section {
+            max-width: 56rem;
+            margin: 0 auto;
+            space: 2rem;
+        }
+
+        .install-title {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            text-align: center;
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .install-steps {
+            space: 1.5rem;
+        }
+
+        .step {
+            background: linear-gradient(to right, rgba(124, 58, 237, 0.5), rgba(0, 0, 0, 0.5));
+            border: 2px solid rgba(6, 182, 212, 0.5);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            display: flex;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            border-color: var(--cyan);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+        }
+
+        .step-number {
+            font-family: var(--font-accent);
+            font-size: 3rem;
+            background: linear-gradient(to bottom-right, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            flex-shrink: 0;
+            text-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
+        }
+
+        .step-content h3 {
+            font-family: var(--font-accent);
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-content p {
+            color: var(--cyan);
+            font-family: var(--font-body);
+            line-height: 1.6;
+        }
+
+        .pro-tip {
+            background: linear-gradient(to bottom-right, rgba(236, 72, 153, 0.3), rgba(124, 58, 237, 0.3));
+            border: 2px solid rgba(236, 72, 153, 0.5);
+            border-radius: 0.5rem;
+            padding: 2rem;
+            text-align: center;
+            space: 1rem;
+            margin-top: 3rem;
+        }
+
+        .pro-tip h3 {
+            font-family: var(--font-accent);
+            font-size: 1.5rem;
+            color: var(--accent);
+            text-shadow: 0 0 10px var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .pro-tip p {
+            color: var(--cyan);
+            font-family: var(--font-body);
+            line-height: 1.6;
+        }
+
+        /* Order Tracking */
+        .order-tracking {
+            max-width: 56rem;
+            margin: 0 auto;
+            space: 2rem;
+        }
+
+        .tracking-title {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            text-align: center;
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .tracking-product {
+            text-align: center;
+            font-size: 1.25rem;
+            color: var(--cyan);
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 1rem;
+            background: rgba(124, 58, 237, 0.5);
+            border-radius: 9999px;
+            overflow: hidden;
+            border: 2px solid var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--secondary), var(--accent));
+            transition: width 1s ease-out;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .progress-text {
+            text-align: center;
+            font-family: var(--font-accent);
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .status-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(124, 58, 237, 0.3);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            transition: all 0.5s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .status-card.active {
+            background: linear-gradient(to bottom-right, rgba(236, 72, 153, 0.7), rgba(124, 58, 237, 0.7));
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(236, 72, 153, 0.5);
+            transform: scale(1.05);
+        }
+
+        .status-card.completed {
+            background: linear-gradient(to bottom-right, rgba(34, 197, 94, 0.5), rgba(6, 182, 212, 0.5));
+            border-color: #22c55e;
+        }
+
+        .status-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-label {
+            font-family: var(--font-accent);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-card.active .status-label {
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary);
+        }
+
+        .status-card.completed .status-label {
+            color: #22c55e;
+        }
+
+        .status-card:not(.active):not(.completed) .status-label {
+            color: var(--text-secondary);
+        }
+
+        .bounce-dots {
+            display: flex;
+            gap: 0.25rem;
+            justify-content: center;
+        }
+
+        .bounce-dot {
+            width: 0.5rem;
+            height: 0.5rem;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: bounce 1.4s infinite;
+        }
+
+        .bounce-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .bounce-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .delivered-message {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(to bottom-right, rgba(34, 197, 94, 0.5), rgba(6, 182, 212, 0.5));
+            border: 2px solid #22c55e;
+            border-radius: 0.5rem;
+            space: 1rem;
+        }
+
+        .delivered-message .icon {
+            font-size: 3rem;
+            animation: bounce 1s ease-in-out infinite;
+        }
+
+        .delivered-message h3 {
+            font-family: var(--font-accent);
+            font-size: 1.5rem;
+            color: #22c55e;
+            text-shadow: 0 0 10px #22c55e;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .delivered-message p {
+            color: var(--cyan);
+            font-family: var(--font-body);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(to bottom-right, #2d1b4e, #0f0a1e);
+            border: 2px solid var(--primary);
+            border-radius: 0.5rem;
+            padding: 2rem;
+            max-width: 28rem;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            color: var(--primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            transform: scale(1.2);
+            text-shadow: 0 0 10px var(--primary);
+        }
+
+        .modal-title {
+            font-family: var(--font-accent);
+            font-size: 1.875rem;
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .modal-section {
+            text-align: center;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(124, 58, 237, 0.5);
+            margin-bottom: 1rem;
+        }
+
+        .modal-product-name {
+            font-size: 1.25rem;
+            color: var(--cyan);
+            font-family: var(--font-body);
+        }
+
+        .modal-price {
+            font-family: var(--font-accent);
+            font-size: 2rem;
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .qr-code {
+            width: 16rem;
+            height: 16rem;
+            background: white;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            border: 4px solid var(--primary);
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .qr-code-icon {
+            font-size: 3rem;
+        }
+
+        .qr-code-text {
+            color: black;
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+        }
+
+        .pix-key-label {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            font-family: var(--font-body);
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .pix-key {
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--cyan);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .pix-key code {
+            color: var(--cyan);
+            font-family: monospace;
+            font-size: 0.875rem;
+            word-break: break-all;
+        }
+
+        .pix-instructions {
+            background: rgba(124, 58, 237, 0.3);
+            border: 2px solid rgba(124, 58, 237, 0.5);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .pix-instructions p {
+            color: var(--cyan);
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .confirm-btn {
+            width: 100%;
+            background: linear-gradient(to right, #22c55e, var(--cyan));
+            color: black;
+            font-family: var(--font-accent);
+            font-size: 1rem;
+            padding: 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+        }
+
+        .confirm-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 2px solid rgba(236, 72, 153, 0.5);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        footer p {
+            color: #9ca3af;
+            font-family: var(--font-body);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-btn {
+                padding: 0.75rem 1rem;
+                font-size: 0.875rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .install-title,
+            .tracking-title {
+                font-size: 1.75rem;
+            }
+
+            .step {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .step-number {
+                font-size: 2rem;
+            }
+        }
+
+        /* Hidden class */
+        .hidden {
+            display: none !important;
+        }
+    </style>
 </head>
-
 <body>
+    <div class="background-effects">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+    </div>
 
-<header>
-  <div class="header-top">
-    <div class="logo">ZENTROK BOX</div>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <img src="https://private-us-east-1.manuscdn.com/sessionFile/acBaUdeeIzUVFxNazF346O/sandbox/h7TJH6PZSQ9kKJAQKKeFm6_1770039461263_na1fn_emVudHJvay1sb2dv.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvYWNCYVVkZWVJelVWRnhOYXpGMzQ2Ty9zYW5kYm94L2g3VEpINlBaU1E5a0tKQVFLS2VGbTZfMTc3MDAzOTQ2MTI2M19uYTFmbl9lbVZ1ZEhKdmF5MXNiMmR2LnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=uqMEW0TAkkq6UTnKqqPHVJ5rGqbvTrcw8P7496Ti7UnzxWNZW6tgrMpKNmgcqUWhuFyhkLzzq6YC39CUnjFNntnyos59Ad1UzVMHS1oir1vM2lxEElWZSEVA2NM--HfVbdhslV42WtO6qy9J2XRZmdeRiTJWy-N3A2mlep9Lnl2BkhQIUheDccgTYC2OZK0aMTeVXjf5f0zbA7en7sUMCdMb2d-rOsSyB5xRfjNPHYA2Tvx6PbMBNSiOGZTI-VDGiz2V07ZXvJfopynhbqlVftm3uXftCd8LdljOn5Iij46kCOQEux6kASO1H94YMaCNCTcJU7E1q8ssxlEuPISUng__" alt="Zentrok Box Logo" class="logo">
+        </div>
+    </header>
+
+    <!-- Navigation -->
     <nav>
-      <button class="active" onclick="trocarAba('comprar',this)">Compre seu HD</button>
-      <button onclick="trocarAba('instalar',this)">Como instalar</button>
+        <div class="nav-content">
+            <button class="nav-btn active" data-tab="buy">COMPRE SEU HD</button>
+            <button class="nav-btn" data-tab="install">COMO INSTALAR</button>
+        </div>
     </nav>
-  </div>
-</header>
 
-<section class="section active" id="comprar">
-  <div class="hero">
-    <h1>HD Gamer Plug & Play</h1>
-    <p>Conectou, ligou, jogou.</p>
-  </div>
+    <!-- Main Content -->
+    <main>
+        <!-- Buy Tab -->
+        <div id="buy-tab" class="tab-content active">
+            <!-- Hero Section -->
+            <div class="hero">
+                <h1>HDS GAMERS PRONTOS</h1>
+                <p>Milhares de jogos pré-instalados. Plug and play. Comece a jogar em minutos.</p>
+            </div>
 
-  <div class="grid">
-    <div class="card">
-      <h3>HD Retrô</h3>
-      <div class="price">R$ 250</div>
-      <button class="buy" onclick="comprar('HD Retrô',250)">Comprar</button>
+            <!-- Products Grid -->
+            <div class="products-grid" id="products-container">
+                <!-- Products will be inserted here by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Install Tab -->
+        <div id="install-tab" class="tab-content hidden">
+            <div class="install-section">
+                <h2 class="install-title">COMO INSTALAR SEU HD GAMER</h2>
+                <div class="install-steps" id="install-steps">
+                    <!-- Steps will be inserted here by JavaScript -->
+                </div>
+                <div class="pro-tip">
+                    <h3>💡 DICA PRO</h3>
+                    <p>A Zentrok Box funciona exclusivamente em PC com o sistema Batocera. Use portas USB 3.0 (geralmente azuis) para melhor desempenho. Mantenha o HD sempre conectado durante o uso.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Tracking -->
+        <div id="tracking-section" class="hidden">
+            <div class="order-tracking">
+                <h2 class="tracking-title">ACOMPANHE SEU PEDIDO</h2>
+                <div class="tracking-product" id="tracking-product"></div>
+                
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                </div>
+                <div class="progress-text" id="progress-text">0%</div>
+
+                <div class="status-grid" id="status-grid">
+                    <!-- Status cards will be inserted here -->
+                </div>
+
+                <div id="delivered-message" class="hidden delivered-message">
+                    <div class="icon">🎮</div>
+                    <h3>PEDIDO ENTREGUE!</h3>
+                    <p>Seu HD Gamer Zentrok Box foi entregue com sucesso! Conecte e comece a jogar agora mesmo. Divirta-se! 🚀</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Payment Modal -->
+    <div id="payment-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closePaymentModal()">✕</button>
+            <h2 class="modal-title">PAGAMENTO VIA PIX</h2>
+            
+            <div class="modal-section">
+                <div class="modal-product-name" id="modal-product-name"></div>
+                <div class="modal-price" id="modal-price"></div>
+            </div>
+
+            <div style="text-align: center;">
+                <div class="qr-code">
+                    <div class="qr-code-icon">📱</div>
+                    <div class="qr-code-text">QR Code PIX</div>
+                </div>
+
+                <div class="pix-key-label">Chave PIX (Poupança Itaú):</div>
+                <div class="pix-key">
+                    <code>zentrokbox@poupanca.itau.com.br</code>
+                </div>
+
+                <div class="pix-instructions">
+                    <p>1. Abra o app do seu banco<br>
+                    2. Escaneie o QR Code ou copie a chave PIX<br>
+                    3. Confirme o pagamento<br>
+                    4. Aguarde a confirmação automática</p>
+                </div>
+
+                <button class="confirm-btn" onclick="confirmPayment()">CONFIRMAR PAGAMENTO</button>
+            </div>
+        </div>
     </div>
 
-    <div class="card">
-      <h3>HD Premium</h3>
-      <div class="price">R$ 300</div>
-      <button class="buy" onclick="comprar('HD Premium',300)">Comprar</button>
-    </div>
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Zentrok Box — Todos os direitos reservados</p>
+    </footer>
 
-    <div class="card">
-      <h3>HD Ultra</h3>
-      <div class="price">R$ 350</div>
-      <button class="buy" onclick="comprar('HD Ultra',350)">Comprar</button>
-    </div>
-  </div>
-</section>
+    <script>
+        // Products Data
+        const products = [
+            {
+                id: 'retro',
+                name: 'HD Retrô',
+                content: [
+                    'Do Atari até o PS1 (e aditivos)'
+                ],
+                price: 250.00,
+                image: 'https://private-us-east-1.manuscdn.com/sessionFile/acBaUdeeIzUVFxNazF346O/sandbox/h7TJH6PZSQ9kKJAQKKeFm6-img-2_1770039451000_na1fn_emVudHJvay1oZC1yZXRybw.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvYWNCYVVkZWVJelVWRnhOYXpGMzQ2Ty9zYW5kYm94L2g3VEpINlBaU1E5a0tKQVFLS2VGbTYtaW1nLTJfMTc3MDAzOTQ1MTAwMF9uYTFmbl9lbVZ1ZEhKdmF5MW9aQzF5WlhSeWJ3LnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=LcdzV15ncs0Okel3nuAY-u5aeUeLkv2MRz4efdYnApV0h~Y7BetzDytOsUAxKKkw0suwFCHL4~aMBJKfoAWWDBsMpLUGRU7zRDHUTSqjiGGHzjPWOeudaCXPsUfOYzOIqIU2CTqUZ12BYhlulkgc3nQZjUPN047sEElrYwJBX-ywTUZgjl-CqOrNVAswiZOM8SayFI~ZyQrCsE~4wnJidEPuiL~2r-io5DC38xkFNoj1iJ~eZevX9iZoC69i4w07HF~-54kE1DNoOJD0iecywnL7OSY-Tp7Fa0QZ0EZyCcrea3TJJ51qO6YNsaBGDKYRYSjTI~Q0Rnt2NBgoz2mhhA__'
+            },
+            {
+                id: 'premium',
+                name: 'HD Premium',
+                content: [
+                    'Do PS1 até o WII (e aditivos)'
+                ],
+                price: 300.00,
+                image: 'https://private-us-east-1.manuscdn.com/sessionFile/acBaUdeeIzUVFxNazF346O/sandbox/h7TJH6PZSQ9kKJAQKKeFm6-img-3_1770039455000_na1fn_emVudHJvay1oZC1wcmVtaXVt.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvYWNCYVVkZWVJelVWRnhOYXpGMzQ2Ty9zYW5kYm94L2g3VEpINlBaU1E5a0tKQVFLS2VGbTYtaW1nLTNfMTc3MDAzOTQ1NTAwMF9uYTFmbl9lbVZ1ZEhKdmF5MW9aQzF3Y21WdGFYVnQucG5nP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTkyMCxoXzE5MjAvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=O3j~uRGh-8R0mXtq8ge0VAbWFiBxbIGW~5kLxf9wKPW8llbuTu9squyeHD412sB0tiGpisBK3HxoQyJDY3zfLycLB9C5qrFKoZDztUjPm9VInePLszRXY-nM~e6HWNFAtC0WeSUaDD71jm6rUsU44w8sV3Nw84rmnxFe0r4SmvdWhd3UKQoy8CKycEoMx7gQWPJ4m9soNVP7wNCCaOKXXVOZ1u-WvSSQIWb8dEGNtkvX97Va6sfwa9MQUbse08jz8s3~F0I2YfLAfKWqR8-uThjccvENMhAo~nCWR-pIPiRrVHcG55aIi8UZL~rsNf8AK51R3CFoNSU3yTIrENqkXQ__'
+            },
+            {
+                id: 'ultra',
+                name: 'HD Ultra',
+                content: [
+                    'Do PS3 até o PS5 (e aditivos)'
+                ],
+                price: 350.00,
+                image: 'https://private-us-east-1.manuscdn.com/sessionFile/acBaUdeeIzUVFxNazF346O/sandbox/h7TJH6PZSQ9kKJAQKKeFm6-img-4_1770039451000_na1fn_emVudHJvay1oZC11bHRyYQ.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvYWNCYVVkZWVJelVWRnhOYXpGMzQ2Ty9zYW5kYm94L2g3VEpINlBaU1E5a0tKQVFLS2VGbTYtaW1nLTRfMTc3MDAzOTQ1MTAwMF9uYTFmbl9lbVZ1ZEhKdmF5MW9aQzExYkhSeVlRLnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=CoB6y40WFACqPVGQtah-Cn0LljW4hjAdMW1Xi1qSAe8og8XiBUTiRDt8KxUxbGHxU7vlDEE--caEyv-onOKkIqkK3bCCUDmbm55Zjj30K5ovBEGiph~DHi8qa98wqlbE7bs0K9TlYsGWhCay2XBfa9i26yT7mjMPNhDzmrN~SCQcDCgnPmtuRAr8EjDBnv28kxsgjIWCBcLkrSrtXrPH2KsGc8hwAhY6RLnGNrax-c4nQLZnvYAIH8VNTIkpx4~Yukoq6LTZodq1X-yF6QjEGcfyhlPrlqT7FMblVA~ak79vElectIf5Is29kWxAalsw0o9PTp5~~0iUL6uQjx-q6w__'
+            }
+        ];
 
-<section class="section" id="instalar">
-  <h1>Como instalar</h1>
-  <p>Conecte o HD → ligue o PC → escolha o boot → pronto.</p>
-</section>
+        // Installation Steps
+        const installSteps = [
+            {
+                step: '01',
+                title: 'CONECTE O HD NO PC',
+                description: 'Conecte o HD Zentrok Box em uma porta USB 3.0 do seu PC. O sistema reconhecerá automaticamente.'
+            },
+            {
+                step: '02',
+                title: 'REINICIE O PC',
+                description: 'Reinicie seu PC com o HD Zentrok Box conectado. O Batocera iniciará automaticamente e carregará toda a biblioteca de emuladores e jogos.'
+            },
+            {
+                step: '03',
+                title: 'NAVEGUE NA BIBLIOTECA',
+                description: 'Use o teclado ou controle USB para navegar pelos emuladores e jogos. O Batocera exibe todos os títulos organizados por console/sistema.'
+            },
+            {
+                step: '04',
+                title: 'COMECE A JOGAR',
+                description: 'Selecione qualquer jogo e pressione Enter para iniciar. O Batocera carrega automaticamente o emulador correto. Divirta-se com milhares de títulos!'
+            }
+        ];
 
-<section class="section" id="statusPedido">
-  <h1>📦 Acompanhamento do pedido</h1>
-  <ul class="status">
-    <li id="s0">✔ Pagamento recebido</li>
-    <li id="s1">⏳ Preparando HD</li>
-    <li id="s2">⏳ Saiu para entrega</li>
-    <li id="s3">⏳ Entregue</li>
-  </ul>
-</section>
+        // Status Info
+        const statusInfo = {
+            confirmed: { label: 'Pagamento Confirmado', progress: 25, icon: '✅' },
+            preparing: { label: 'Preparando seu HD', progress: 50, icon: '⚙️' },
+            shipping: { label: 'Saiu para Entrega', progress: 75, icon: '🚚' },
+            delivered: { label: 'Entregue', progress: 100, icon: '🎉' }
+        };
 
-<!-- MODAL -->
-<div id="modal">
-  <div class="modal-box">
-    <h2 id="produtoNome"></h2>
-    <p id="produtoValor"></p>
+        // State
+        let currentTab = 'buy';
+        let orderStatus = 'idle';
+        let selectedProduct = null;
+        let orderProduct = null;
 
-    <img src="SEU_QRCODE_PIX.png" style="width:220px;margin:20px 0">
+        // Initialize
+        function init() {
+            renderProducts();
+            renderInstallSteps();
+            setupEventListeners();
+        }
 
-    <p style="font-size:.85rem;color:#aaa">
-      Chave PIX:<br>
-      <strong>SUA_CHAVE_PIX_ITAU</strong>
-    </p>
+        // Render Products
+        function renderProducts() {
+            const container = document.getElementById('products-container');
+            container.innerHTML = products.map((product, index) => `
+                <div class="product-card" style="animation-delay: ${index * 100}ms;">
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">${product.name}</h3>
+                        <ul class="product-features">
+                            ${product.content.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                        <div class="product-footer">
+                            <div class="product-price">
+                                <div class="price-label">Apenas</div>
+                                <div class="price-value">R$ ${product.price.toFixed(2)}</div>
+                            </div>
+                            <button class="buy-btn" onclick="openPaymentModal('${product.id}')">COMPRAR</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
 
-    <button class="buy" onclick="confirmarPagamento()">Já paguei</button><br><br>
-    <button onclick="fecharModal()" style="background:none;border:none;color:#aaa;cursor:pointer">Cancelar</button>
-  </div>
-</div>
+        // Render Install Steps
+        function renderInstallSteps() {
+            const container = document.getElementById('install-steps');
+            container.innerHTML = installSteps.map(item => `
+                <div class="step">
+                    <div class="step-number">${item.step}</div>
+                    <div class="step-content">
+                        <h3>${item.title}</h3>
+                        <p>${item.description}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
 
-<footer>
-© 2026 Zentrok Box — Todos os direitos reservados
-</footer>
+        // Setup Event Listeners
+        function setupEventListeners() {
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    switchTab(e.target.dataset.tab);
+                });
+            });
+        }
 
-<script>
-function trocarAba(id,btn){
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
-}
+        // Switch Tab
+        function switchTab(tab) {
+            currentTab = tab;
+            
+            // Update nav buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.tab === tab) {
+                    btn.classList.add('active');
+                }
+            });
 
-function comprar(nome,valor){
-  document.getElementById('produtoNome').innerText = nome;
-  document.getElementById('produtoValor').innerText = 'Valor: R$ ' + valor;
-  document.getElementById('modal').style.display = 'flex';
-}
+            // Update content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            document.getElementById(`${tab}-tab`).classList.remove('hidden');
 
-function fecharModal(){
-  document.getElementById('modal').style.display = 'none';
-}
+            // Hide tracking if switching away from buy
+            if (tab !== 'buy') {
+                document.getElementById('tracking-section').classList.add('hidden');
+            } else if (orderStatus !== 'idle') {
+                document.getElementById('tracking-section').classList.remove('hidden');
+            }
+        }
 
-function confirmarPagamento(){
-  fecharModal();
-  trocarAba('statusPedido');
-  setTimeout(()=>s1.innerText='✔ HD preparado',3000);
-  setTimeout(()=>s2.innerText='✔ Saiu para entrega',7000);
-  setTimeout(()=>s3.innerText='✔ Entregue',12000);
-}
-</script>
+        // Open Payment Modal
+        function openPaymentModal(productId) {
+            selectedProduct = products.find(p => p.id === productId);
+            document.getElementById('modal-product-name').textContent = selectedProduct.name;
+            document.getElementById('modal-price').textContent = `R$ ${selectedProduct.price.toFixed(2)}`;
+            document.getElementById('payment-modal').classList.add('active');
+        }
 
+        // Close Payment Modal
+        function closePaymentModal() {
+            document.getElementById('payment-modal').classList.remove('active');
+        }
+
+        // Confirm Payment
+        function confirmPayment() {
+            closePaymentModal();
+            orderProduct = selectedProduct;
+            orderStatus = 'payment';
+            showTracking();
+            
+            // Simulate payment confirmation after 2 seconds
+            setTimeout(() => {
+                orderStatus = 'confirmed';
+                updateTracking();
+            }, 2000);
+        }
+
+        // Show Tracking
+        function showTracking() {
+            document.getElementById('tracking-section').classList.remove('hidden');
+            document.getElementById('tracking-product').textContent = `${orderProduct.name} - R$ ${orderProduct.price.toFixed(2)}`;
+            renderStatusCards();
+            updateTracking();
+        }
+
+        // Render Status Cards
+        function renderStatusCards() {
+            const grid = document.getElementById('status-grid');
+            grid.innerHTML = Object.entries(statusInfo).map(([status, info]) => `
+                <div class="status-card" id="status-${status}">
+                    <div class="status-icon">${info.icon}</div>
+                    <div class="status-label">${info.label}</div>
+                </div>
+            `).join('');
+        }
+
+        // Update Tracking
+        function updateTracking() {
+            const statuses = ['confirmed', 'preparing', 'shipping', 'delivered'];
+            const currentIndex = statuses.indexOf(orderStatus);
+            const info = statusInfo[orderStatus] || { progress: 0 };
+
+            // Update progress bar
+            document.getElementById('progress-fill').style.width = `${info.progress}%`;
+            document.getElementById('progress-text').textContent = `${info.progress}%`;
+
+            // Update status cards
+            statuses.forEach((status, index) => {
+                const card = document.getElementById(`status-${status}`);
+                card.classList.remove('active', 'completed');
+                
+                if (status === orderStatus) {
+                    card.classList.add('active');
+                    if (status !== 'delivered') {
+                        card.innerHTML = `
+                            <div class="status-icon">${statusInfo[status].icon}</div>
+                            <div class="status-label">${statusInfo[status].label}</div>
+                            <div class="bounce-dots">
+                                <div class="bounce-dot"></div>
+                                <div class="bounce-dot"></div>
+                                <div class="bounce-dot"></div>
+                            </div>
+                        `;
+                    }
+                } else if (index < currentIndex) {
+                    card.classList.add('completed');
+                }
+            });
+
+            // Show delivered message
+            if (orderStatus === 'delivered') {
+                document.getElementById('delivered-message').classList.remove('hidden');
+            }
+
+            // Schedule next status update
+            if (orderStatus !== 'delivered') {
+                const timings = {
+                    payment: 0,
+                    confirmed: 3000,
+                    preparing: 120000,
+                    shipping: 180000
+                };
+
+                const nextStatus = {
+                    payment: 'confirmed',
+                    confirmed: 'preparing',
+                    preparing: 'shipping',
+                    shipping: 'delivered'
+                };
+
+                setTimeout(() => {
+                    orderStatus = nextStatus[orderStatus];
+                    updateTracking();
+                }, timings[orderStatus]);
+            }
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('payment-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'payment-modal') {
+                closePaymentModal();
+            }
+        });
+
+        // Initialize on load
+        window.addEventListener('load', init);
+    </script>
 </body>
 </html>
-
-
